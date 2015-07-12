@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sudoku" default="run" basedir=".">
+	<property name="src" value="src/com/demo/sudoku" />
+	<property name="dest" value="bin/com/demo/sudoku" />
+	<property name="Sudoku_jar" value="Sudoku.jar" />
+	<path id="Sudoku.classpath">
+		<pathelement location="bin" />
+	</path>
+	<target name="init">
+		<echo message="The base dir is: ${basedir}" />
+		<mkdir dir="${dest}" />
+	</target>
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${dest}" classpathref="Sudoku.classpath" includeantruntime="false" />
+	</target>
+	<target name="build" depends="compile">
+		<jar jarfile="${Sudoku_jar}" basedir="${dest}" />
+	</target>
+	<target name="run" depends="build">
+		<java classname="com.demo.sudoku.SudokuStart" fork="true">
+			<classpath>
+				<path refid="Sudoku.classpath" />
+			</classpath>
+		</java>
+	</target>
+	<target name="clean">
+		<delete dir="${dest}" />
+		<delete file="${Sudoku_jar}" />
+	</target>
+	<target name="rerun" depends="clean,run">
+		<ant target="clean" />
+		<ant target="run" />
+	</target>
+</project>
