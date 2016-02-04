@@ -10,8 +10,8 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import com.demo.sudoku.Utility;
+import com.demo.sudoku.model.SudokuContainer;
 import com.demo.sudoku.model.SudokuFullResult;
-import com.demo.sudoku.model.SudokuTemplate;
 
 public class SudokuFullResultTest {
 	private final static int[][] template = { { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
@@ -32,7 +32,7 @@ public class SudokuFullResultTest {
 		assertArrayEquals(result, Utility.normalize(r1.getSudoku()));
 		
 		Path templatePath = FileSystems.getDefault().getPath(templatePathInString);
-		SudokuTemplate st = new SudokuTemplate(templatePath);
+		SudokuContainer st = new SudokuContainer(templatePath);
 		assertFalse(Utility.isCorrect2(st.getSudoku()));
 		SudokuFullResult r2 = new SudokuFullResult(st);
 		int[][] test = Utility.normalize(r2.getSudoku());

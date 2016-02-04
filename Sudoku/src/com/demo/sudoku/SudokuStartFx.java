@@ -8,9 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import com.demo.sudoku.model.Sudoku;
+import com.demo.sudoku.model.SudokuContainer;
 import com.demo.sudoku.model.SudokuFull;
 import com.demo.sudoku.model.SudokuFullResult;
-import com.demo.sudoku.model.SudokuTemplate;
 import com.demo.sudoku.view.SudokuFrameFx;
 
 public class SudokuStartFx extends Application {
@@ -21,7 +21,7 @@ public class SudokuStartFx extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Path templatePath = FileSystems.getDefault().getPath(
 				templatePathInString);
-		Sudoku template = new SudokuTemplate(templatePath);
+		Sudoku template = new SudokuContainer(templatePath);
 		System.out.println("-- <Template> --");
 		printSudoku(template.getSudoku());
 

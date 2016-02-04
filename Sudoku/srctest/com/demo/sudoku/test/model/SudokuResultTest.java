@@ -54,7 +54,7 @@ public class SudokuResultTest {
     }
 	
 	@Test
-	public void testGetResult() throws IOException {
+	public void testGetSudoku() throws IOException {
 		SudokuResult r1 = new SudokuResult(template);
 		assertArrayEquals(result, r1.getSudoku());
 		

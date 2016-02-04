@@ -8,7 +8,7 @@ public class SudokuFullResult implements SudokuFull {
 
 	private Cell[][] result;
 
-	public SudokuFullResult(SudokuTemplate template) {
+	public SudokuFullResult(SudokuContainer template) {
 		this(template.getSudoku());
 	}
 
@@ -95,4 +95,18 @@ public class SudokuFullResult implements SudokuFull {
 		return this.result;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				if (result[i][j] != null & result[i][j].getNumber() != null) {
+					if (result[i][j].getNumber() == 0)
+						sb.append(" ");
+					else
+						sb.append(result[i][j].toString());
+				}
+			}
+		}
+		return sb.toString();
+	}
 }

@@ -99,4 +99,16 @@ public class SudokuTemplate implements Sudoku {
 		return this.template;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				if (template[i][j] == 0)
+					sb.append(" ");
+				else
+					sb.append(Integer.toString(template[i][j]));
+			}
+		}
+		return sb.toString();
+	}
 }

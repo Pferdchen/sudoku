@@ -28,7 +28,7 @@ public class SudokuTemplateTest {
 	}
 
 	@Test
-	public void testGetTemplate() {
+	public void testGetSudoku() {
 		assertArrayEquals(template, st.getSudoku());
 	}
 

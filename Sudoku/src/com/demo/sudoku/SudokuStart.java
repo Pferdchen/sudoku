@@ -4,9 +4,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import com.demo.sudoku.model.Sudoku;
+import com.demo.sudoku.model.SudokuContainer;
 import com.demo.sudoku.model.SudokuFull;
 import com.demo.sudoku.model.SudokuFullResult;
-import com.demo.sudoku.model.SudokuTemplate;
 import com.demo.sudoku.view.SudokuFrame;
 
 public class SudokuStart {
@@ -14,7 +14,7 @@ public class SudokuStart {
 	public static void main(String[] args) {
 		Path templatePath = FileSystems.getDefault().getPath(
 				templatePathInString);
-		Sudoku template = new SudokuTemplate(templatePath);
+		Sudoku template = new SudokuContainer(templatePath);
 		System.out.println("-- <Template> --");
 		printSudoku(template.getSudoku());
 
@@ -30,7 +30,7 @@ public class SudokuStart {
 		System.out.println("--------------");
 		System.out.println("Result is "
 				+ (Utility.isCorrect2(result) ? "correct" : "not correct"));
-
+		
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				SudokuFrame frame = new SudokuFrame(template);

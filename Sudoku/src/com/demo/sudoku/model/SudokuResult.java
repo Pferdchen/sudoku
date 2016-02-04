@@ -98,4 +98,17 @@ public class SudokuResult implements Sudoku {
 	public int[][] getSudoku() {
 		return this.result;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				if (result[i][j] == 0)
+					sb.append(" ");
+				else
+					sb.append(Integer.toString(result[i][j]));
+			}
+		}
+		return sb.toString();
+	}
 }
