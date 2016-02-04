@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.demo.sudoku.model.Cell;
+import com.demo.sudoku.model.Sudoku;
 import com.demo.sudoku.model.SudokuFull;
-import com.demo.sudoku.model.SudokuResult;
 
 public class Utility {
 
@@ -70,25 +70,25 @@ public class Utility {
 		if (sudoku == null)
 			return false;
 
-		if (sudoku.length != SudokuResult.SIZE)
+		if (sudoku.length != Sudoku.SIZE)
 			return false;
 
-		int sum = sum(SudokuResult.SIZE);
-		int fac = fac(SudokuResult.SIZE);
+		int sum = sum(Sudoku.SIZE);
+		int fac = fac(Sudoku.SIZE);
 
 		int rowSum;
 		int rowPro;
 		int columnSum;
 		int columnPro;
-		for (int i = 0; i < SudokuResult.SIZE; i++) {
-			if (sudoku[i].length != SudokuResult.SIZE)
+		for (int i = 0; i < Sudoku.SIZE; i++) {
+			if (sudoku[i].length != Sudoku.SIZE)
 				return false;
 
 			rowSum = 0;
 			rowPro = 1;
 			columnSum = 0;
 			columnPro = 1;
-			for (int j = 0; j < SudokuResult.SIZE; j++) {
+			for (int j = 0; j < Sudoku.SIZE; j++) {
 				rowSum += sudoku[i][j];
 				rowPro *= sudoku[i][j];
 				columnSum += sudoku[j][i];
@@ -130,24 +130,24 @@ public class Utility {
 		if (sudoku == null)
 			return false;
 
-		if (sudoku.length != SudokuResult.SIZE)
+		if (sudoku.length != Sudoku.SIZE)
 			return false;
 
 		Integer[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		Set<Integer> numberSet;
-		for (int i = 0; i < SudokuResult.SIZE; i++) {
-			if (sudoku[i].length != SudokuResult.SIZE)
+		for (int i = 0; i < Sudoku.SIZE; i++) {
+			if (sudoku[i].length != Sudoku.SIZE)
 				return false;
 
 			numberSet = new HashSet<Integer>(Arrays.asList(numbers));
-			for (int j = 0; j < SudokuResult.SIZE; j++) {
+			for (int j = 0; j < Sudoku.SIZE; j++) {
 				numberSet.remove(sudoku[i][j]);
 			}
 			if (!numberSet.isEmpty())
 				return false;
 
 			numberSet = new HashSet<Integer>(Arrays.asList(numbers));
-			for (int j = 0; j < SudokuResult.SIZE; j++) {
+			for (int j = 0; j < Sudoku.SIZE; j++) {
 				numberSet.remove(sudoku[j][i]);
 			}
 			if (!numberSet.isEmpty())
