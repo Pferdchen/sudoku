@@ -16,3 +16,7 @@ Design and implement a sudoku algorithm with [JavaFX 13](https://openjfx.io/open
 * Use a build system (e.g. maven/gradle) to download the required modules from Maven Central.
 
 For both options, it is required to have a recent version of JDK 13, or at least JDK 11.
+
+### Maven sample
+
+[hellofx](https://github.com/openjfx/samples/tree/master/HelloFX/Maven) is good start.
