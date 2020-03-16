@@ -1,12 +1,20 @@
-# sudoku
+# sudoku repository
 
-Basic sudoku algorithm (todo maybe a module). Learn new features of JDK 13.
+Design and implement a sudoku algorithm with Java Swing and AWT or JavaFX.
 
-## Sudoku
+## ~~Sudoku deprecated~~
 
-Design and implement a sudoku algorithm with Java Swing and AWT.
+A basic sudoku algorithm. Learn new features of JDK 13.
 
-## SudokuFX
+## Sudoku2
+
+A Non-Modular-Maven project for sudoku core.
+
+## Sudoku3
+
+A Modular-Maven project for sudoku core.
+
+## ~~SudokuFX deprecated~~
 
 Design and implement a sudoku algorithm with [JavaFX 14](https://openjfx.io/openjfx-docs/).
 
@@ -19,19 +27,17 @@ For both options, it is required to have a recent version of JDK 14, or at least
 
 ## SudokuFX2
 
-A Non-Modular-Maven project for Sudoku.
+A Non-Modular-Maven project for sudoku GUI.
 
-### For Netbeans
+### Netbeans
 
 Before running the project from the Run button, we need to instruct NetBeans to use the javafx plugin instead of the default one. For that, go to Properties -> Actions -> Run project and change the Execute Goals with this: 
 
 > clean javafx:run
 
-
-
 ## SudokuFX3
 
-A Modular-Maven project for Sudoku.
+A Modular-Maven project for sudoku GUI.
 
 ### Netbeans
 
