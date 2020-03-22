@@ -23,9 +23,8 @@ public class Normalizer {
                 throw new IllegalArgumentException("The given puzzle is not valid!");
             }
             char c = (char) i;
-            int numericValue = Character.getNumericValue(c);
-            if (numericValue > 0) {
-                intArr[index] = numericValue;
+            if (Character.isDigit(c)) {
+                intArr[index] = Character.getNumericValue(c);
                 index++;
             } else if (c == ' ') {
                 intArr[index] = null;
@@ -114,7 +113,8 @@ public class Normalizer {
 
     private static final String LINE_BREAK_REGEX = "\\r\\n|\\n|\\r";
 
-    private static final Pattern SINGLE_DIGIT_PATTERN = Pattern.compile("\\d");
+    private static final Pattern SINGLE_DIGIT_PATTERN
+            = Pattern.compile("^[1-9]$");// except 0
 
     private static boolean isDigit(String str) {
         return SINGLE_DIGIT_PATTERN.matcher(str).matches();
