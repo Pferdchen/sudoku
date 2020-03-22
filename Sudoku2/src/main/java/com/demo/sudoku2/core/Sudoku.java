@@ -37,6 +37,9 @@ public class Sudoku {
      * @param puzzle is an array of 81 {@code Integer}s.
      */
     public Sudoku(Integer[] puzzle) {
+        if (puzzle == null || puzzle.length != 81) {
+            throw new IllegalArgumentException("The given puzzle is not valid!");
+        }
         this.puzzle = puzzle;
         this.rows = new ArrayList<>();
         this.columns = new ArrayList<>();
