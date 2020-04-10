@@ -27,7 +27,7 @@ For both options, it is required to have a recent version of JDK 14, or at least
 
 ## SudokuFX2
 
-A Non-Modular-Maven project for sudoku GUI.
+A Non-Modular-Maven project for sudoku GUI with JavaFX.
 
 ### Netbeans
 
@@ -37,7 +37,7 @@ Before running the project from the Run button, we need to instruct NetBeans to 
 
 ## SudokuFX3
 
-A Modular-Maven project for sudoku GUI.
+A Modular-Maven project for sudoku GUI with JavaFX.
 
 ### Netbeans
 
@@ -53,6 +53,10 @@ Edit the module-info class. To prevent Eclipse from showing a warning when creat
 requires transitive javafx.graphics;
 ```
 
-### Maven sample
+## SudokuFXSimple
 
-[hellofx](https://github.com/openjfx/samples/tree/master/HelloFX/Maven) is good start.
+A Modular-Maven project for sudoku GUI with JavaFX, but without FXML files
+
+## SudokuJSF
+
+A Non-Modular-Maven project for sudoku GUI with JSF. A Java Web Server is needed for deploying. Create custom UI component.
