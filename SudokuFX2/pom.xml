@@ -7,9 +7,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
+        <sudoku2.version>1.0-SNAPSHOT</sudoku2.version>
         <javafx.version>14</javafx.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>Sudoku2</artifactId>
+            <version>${sudoku2.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
