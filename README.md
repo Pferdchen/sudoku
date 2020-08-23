@@ -61,4 +61,4 @@ A Modular-Maven project for sudoku GUI with JavaFX, but without FXML files
 
 A Non-Modular-Maven project for sudoku GUI with JSF. A Java Web Server is needed for deploying. Create custom UI component.
 
-Since H2 database ships with WildFly / JBoss EAP, set up H2 or testing.
+Since H2 database ships with WildFly / JBoss EAP, set up H2 for testing.
