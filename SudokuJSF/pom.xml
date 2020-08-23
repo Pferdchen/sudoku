@@ -21,17 +21,22 @@
     </properties>
 
     <dependencies>
+        <!-- Sudoku Core -->
         <dependency>
             <groupId>com.demo</groupId>
             <artifactId>Sudoku2</artifactId>
             <version>${sudoku2.version}</version>
         </dependency>
+        <!-- Jakarta EE -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- The Eclipse MicroProfile project is aimed at optimizing Enterprise
+        Java for the microservices architecture -->
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
@@ -39,12 +44,14 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- Mockito is a mocking framework for unit tests in Java -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
