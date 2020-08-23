@@ -27,7 +27,6 @@ public class Solution implements Serializable {
 
     /**
      * Default value included to remove warning. Remove or modify at will.
-     *
      */
     private static final long serialVersionUID = 1L;
 
@@ -42,6 +41,12 @@ public class Solution implements Serializable {
     @Pattern(regexp = "^([1-9]){81}$", message = "must contain 81 digits in [1..9]")
     @Column(name = "SOLUTION_DATA")
     private String solutionData;
+
+    /**
+     * Because it generates automatically, no Bean Validation @NotNull required
+     */
+    @Column(name = "PUZZLE_ID", nullable = false)
+    private long puzzleId;
 
     public Long getId() {
         return id;
@@ -58,4 +63,13 @@ public class Solution implements Serializable {
     public void setSolutionData(String solutionData) {
         this.solutionData = solutionData;
     }
+
+    public long getPuzzleId() {
+        return puzzleId;
+    }
+
+    public void setPuzzleId(long puzzleId) {
+        this.puzzleId = puzzleId;
+    }
+
 }

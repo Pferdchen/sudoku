@@ -1,11 +1,15 @@
 package com.demo.sudokujsf.model;
 
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -26,7 +30,6 @@ public class Puzzle implements Serializable {
 
     /**
      * Default value included to remove warning. Remove or modify at will.
-     *
      */
     private static final long serialVersionUID = 1L;
 
@@ -40,6 +43,15 @@ public class Puzzle implements Serializable {
     @Pattern(regexp = "^([1-9]|\\s){81}$", message = "must contain only digits and spaces")
     @Column(name = "PUZZLE_DATA")
     private String puzzleData;
+
+    /**
+     * Unidirectional OneToMany, No Inverse ManyToOne, No Join Table (JPA 2.x
+     * ONLY). I've used a Set rather than a List, because the solutions are not
+     * ordered.
+     */
+    @OneToMany
+    @JoinColumn(name = "PUZZLE_ID", referencedColumnName = "ID")
+    private Set<Solution> solutions;
 
     public Long getId() {
         return id;
@@ -56,4 +68,13 @@ public class Puzzle implements Serializable {
     public void setPuzzleData(String puzzleData) {
         this.puzzleData = puzzleData;
     }
+
+    public Set<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(Set<Solution> solutions) {
+        this.solutions = solutions;
+    }
+
 }
