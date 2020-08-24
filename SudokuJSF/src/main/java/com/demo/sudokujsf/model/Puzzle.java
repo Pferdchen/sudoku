@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -26,6 +28,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "PUZZLE", uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
+@NamedQueries({
+    @NamedQuery(name = "Puzzle.findAll",
+            query = "SELECT p FROM Puzzle p ORDER BY p.id"),
+    @NamedQuery(name = "Puzzle.findById",
+            query = "SELECT p FROM Puzzle p WHERE p.id = :id"),
+    @NamedQuery(name = "Puzzle.findByName",
+            query = "SELECT p FROM Puzzle p WHERE p.name = :name")
+})
 public class Puzzle implements Serializable {
 
     /**
@@ -36,6 +46,11 @@ public class Puzzle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
+    @NotEmpty
+    @Column(name = "NAME")
+    private String name;
 
     @NotNull
     @NotEmpty
@@ -59,6 +74,14 @@ public class Puzzle implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPuzzleData() {

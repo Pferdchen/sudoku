@@ -14,10 +14,8 @@ public class EJBPuzzleDao implements PuzzleDao {
 
     @Override
     public List<Puzzle> getAllPuzzles() {
-        String query = "SELECT p FROM Puzzle p ORDER BY p.id";
-        List<Puzzle> result = em.createQuery(query, Puzzle.class)
+        return em.createNamedQuery("Puzzle.findAll", Puzzle.class)
                 .getResultList();
-        return result;
     }
 
 }
