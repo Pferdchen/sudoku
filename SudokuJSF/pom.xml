@@ -16,8 +16,8 @@
         <sudoku2.version>1.0-SNAPSHOT</sudoku2.version>
         <jakartaee.version>8.0.0</jakartaee.version>
         <microprofile.version>3.3</microprofile.version>
-        <junit-jupiter.version>5.6.1</junit-jupiter.version>
-        <mockito-core.version>3.3.3</mockito-core.version>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
+        <mockito-core.version>3.5.5</mockito-core.version>
     </properties>
 
     <dependencies>
@@ -77,7 +77,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
+                <version>3.3.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
