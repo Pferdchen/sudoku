@@ -4,6 +4,7 @@ import static com.demo.sudoku2.util.Indexer.columnIndex;
 import static com.demo.sudoku2.util.Indexer.regionIndex;
 import static com.demo.sudoku2.util.Indexer.rowIndex;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,10 +38,8 @@ public class Sudoku {
      * @param puzzle is an array of 81 {@code Integer}s.
      */
     public Sudoku(Integer[] puzzle) {
-        if (puzzle == null || puzzle.length != 81) {
-            throw new IllegalArgumentException("The given puzzle is not valid!");
-        }
         this.puzzle = puzzle;
+        validateBefore();
         this.rows = new ArrayList<>();
         this.columns = new ArrayList<>();
         this.regions = new ArrayList<>();
@@ -61,6 +60,43 @@ public class Sudoku {
             this.regions.get(regionIndex(i)).add(cell);
             i++;
         }
+        validateAfter();
+    }
+
+    private void validateBefore() {
+        if (this.puzzle == null || this.puzzle.length != 81) {
+            throw new IllegalArgumentException("The length of given puzzle is invalid!");
+        }
+    }
+
+    private void validateAfter() {
+        int i = 1;
+        while (i <= 9) {
+            if (hasDuplicate(this.rows.get(i - 1))) {
+                throw new IllegalArgumentException(i + ". row of given puzzle is invalid!");
+            }
+            if (hasDuplicate(this.columns.get(i - 1))) {
+                throw new IllegalArgumentException(i + ". column of given puzzle is invalid!");
+            }
+            if (hasDuplicate(this.regions.get(i - 1))) {
+                throw new IllegalArgumentException(i + ". region of given puzzle is invalid!");
+            }
+            i++;
+        }
+    }
+
+    private static boolean hasDuplicate(List<Cell> cells) {
+        Set<Integer> intSet = new HashSet<>();
+        for (Cell cell : cells) {
+            if (cell.result != null) {
+                if (intSet.contains(cell.result)) {
+                    return true;
+                } else {
+                    intSet.add(cell.result);
+                }
+            }
+        }
+        return false;
     }
 
     public Integer[] getPuzzle() {
@@ -145,6 +181,10 @@ public class Sudoku {
                     c.suggestions.remove(cell.result);// reduce sets in region
                     reduceSets(solution.indexOf(c));
                 });
+    }
+
+    public boolean isSolved() {
+        return solution.stream().noneMatch(cell -> (cell.isEmpty()));
     }
 
     @Override
