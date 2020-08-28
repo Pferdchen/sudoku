@@ -6,6 +6,7 @@ import static com.demo.sudoku2.util.Indexer.rowIndex;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Sudoku {
@@ -38,7 +39,8 @@ public class Sudoku {
      * @param puzzle is an array of 81 {@code Integer}s.
      */
     public Sudoku(Integer[] puzzle) {
-        this.puzzle = puzzle;
+        this.puzzle = Objects.requireNonNull(puzzle, 
+                "Input puzzle is an Integer array with 81 elements!");
         validateBefore();
         this.rows = new ArrayList<>();
         this.columns = new ArrayList<>();
@@ -65,7 +67,8 @@ public class Sudoku {
 
     private void validateBefore() {
         if (this.puzzle == null || this.puzzle.length != 81) {
-            throw new IllegalArgumentException("The length of given puzzle is invalid!");
+            throw new IllegalArgumentException(
+                    "The length of given puzzle is invalid!");
         }
     }
 
@@ -73,13 +76,16 @@ public class Sudoku {
         int i = 1;
         while (i <= 9) {
             if (hasDuplicate(this.rows.get(i - 1))) {
-                throw new IllegalArgumentException(i + ". row of given puzzle is invalid!");
+                throw new IllegalArgumentException(
+                        i + ". row of given puzzle is invalid!");
             }
             if (hasDuplicate(this.columns.get(i - 1))) {
-                throw new IllegalArgumentException(i + ". column of given puzzle is invalid!");
+                throw new IllegalArgumentException(
+                        i + ". column of given puzzle is invalid!");
             }
             if (hasDuplicate(this.regions.get(i - 1))) {
-                throw new IllegalArgumentException(i + ". region of given puzzle is invalid!");
+                throw new IllegalArgumentException(
+                        i + ". region of given puzzle is invalid!");
             }
             i++;
         }
