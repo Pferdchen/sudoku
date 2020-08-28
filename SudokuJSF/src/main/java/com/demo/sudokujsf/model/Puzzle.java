@@ -2,7 +2,6 @@ package com.demo.sudokujsf.model;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +29,11 @@ import javax.validation.constraints.Size;
 @Table(name = "PUZZLE", uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
 @NamedQueries({
     @NamedQuery(name = "Puzzle.findAll",
-            query = "SELECT p FROM Puzzle p ORDER BY p.id"),
+            query = "FROM Puzzle p ORDER BY p.id"),
     @NamedQuery(name = "Puzzle.findById",
-            query = "SELECT p FROM Puzzle p WHERE p.id = :id"),
-    @NamedQuery(name = "Puzzle.findByName",
-            query = "SELECT p FROM Puzzle p WHERE p.name = :name")
+            query = "FROM Puzzle p WHERE p.id = :id"),
+    @NamedQuery(name = "Puzzle.findAllWithName",
+            query = "FROM Puzzle p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
 })
 public class Puzzle implements Serializable {
 
