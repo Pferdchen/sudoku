@@ -4,10 +4,33 @@ import static com.demo.sudoku2.util.Normalizer.normalize;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class NormalizerTest {
+
+    private static String sudokuTemplate;
+    private static Integer[] expectedPuzzle;
+
+    @BeforeAll
+    static void init() {
+        sudokuTemplate = "templates/template1.txt";
+        expectedPuzzle = new Integer[]{
+            5, 3, null, null, 7, null, null, null, null,
+            6, null, null, 1, 9, 5, null, null, null,
+            null, 9, 8, null, null, null, null, 6, null,
+            8, null, null, null, 6, null, null, null, 3,
+            4, null, null, 8, null, 3, null, null, 1,
+            7, null, null, null, 2, null, null, null, 6,
+            null, 6, null, null, null, null, 2, 8, null,
+            null, null, null, 4, 1, 9, null, null, 5,
+            null, null, null, null, 8, null, null, 7, 9};
+    }
 
     @Test
     void testNormalizeString() {
@@ -51,55 +74,39 @@ public class NormalizerTest {
                 + " ,6, , , , ,2,8, " + "\n"
                 + " , , ,4,1,9, , ,5" + "\n"
                 + " , , , ,8, , ,7,9";
-        Integer[] expectedIntArr
-                = {5, 3, null, null, 7, null, null, null, null,
-                    6, null, null, 1, 9, 5, null, null, null,
-                    null, 9, 8, null, null, null, null, 6, null,
-                    8, null, null, null, 6, null, null, null, 3,
-                    4, null, null, 8, null, 3, null, null, 1,
-                    7, null, null, null, 2, null, null, null, 6,
-                    null, 6, null, null, null, null, 2, 8, null,
-                    null, null, null, 4, 1, 9, null, null, 5,
-                    null, null, null, null, 8, null, null, 7, 9};
-        assertArrayEquals(expectedIntArr, normalize(ONE_LINE_WITHOUT_COMMA));
-        assertArrayEquals(expectedIntArr, normalize(ONE_LINE_WITH_COMMA));
-        assertArrayEquals(expectedIntArr, normalize(NINE_LINE_WITHOUT_COMMA));
-        assertArrayEquals(expectedIntArr, normalize(NINE_LINE_WITH_COMMA));
+        assertArrayEquals(expectedPuzzle, normalize(ONE_LINE_WITHOUT_COMMA));
+        assertArrayEquals(expectedPuzzle, normalize(ONE_LINE_WITH_COMMA));
+        assertArrayEquals(expectedPuzzle, normalize(NINE_LINE_WITHOUT_COMMA));
+        assertArrayEquals(expectedPuzzle, normalize(NINE_LINE_WITH_COMMA));
     }
 
     @Test
     void testNormalizeFile() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("templates/template1.txt").getFile());
-        Integer[] expectedIntArr
-                = {5, 3, null, null, 7, null, null, null, null,
-                    6, null, null, 1, 9, 5, null, null, null,
-                    null, 9, 8, null, null, null, null, 6, null,
-                    8, null, null, null, 6, null, null, null, 3,
-                    4, null, null, 8, null, 3, null, null, 1,
-                    7, null, null, null, 2, null, null, null, 6,
-                    null, 6, null, null, null, null, 2, 8, null,
-                    null, null, null, 4, 1, 9, null, null, 5,
-                    null, null, null, null, 8, null, null, 7, 9};
-        assertArrayEquals(expectedIntArr, normalize(file));
+        File file = new File(classLoader
+                .getResource(sudokuTemplate).getFile());
+        assertArrayEquals(expectedPuzzle, normalize(file));
+    }
+
+    @Test
+    void testNormalizePath() throws IOException, URISyntaxException {
+        Path path = Paths.get(getClass().getClassLoader()
+                .getResource(sudokuTemplate).toURI());
+        assertArrayEquals(expectedPuzzle, normalize(path));
     }
 
     @Test
     void testNormalizeStream() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream is = classLoader.getResourceAsStream("templates/template1.txt")) {
-            Integer[] expectedIntArr
-                    = {5, 3, null, null, 7, null, null, null, null,
-                        6, null, null, 1, 9, 5, null, null, null,
-                        null, 9, 8, null, null, null, null, 6, null,
-                        8, null, null, null, 6, null, null, null, 3,
-                        4, null, null, 8, null, 3, null, null, 1,
-                        7, null, null, null, 2, null, null, null, 6,
-                        null, 6, null, null, null, null, 2, 8, null,
-                        null, null, null, 4, 1, 9, null, null, 5,
-                        null, null, null, null, 8, null, null, 7, 9};
-            assertArrayEquals(expectedIntArr, normalize(is));
+        try ( InputStream is = classLoader
+                .getResourceAsStream(sudokuTemplate)) {
+            assertArrayEquals(expectedPuzzle, normalize(is));
         }
     }
 
+    @AfterAll
+    static void tearDown() {
+        sudokuTemplate = null;
+        expectedPuzzle = null;
+    }
 }
