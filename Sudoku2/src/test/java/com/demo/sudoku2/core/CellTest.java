@@ -34,7 +34,7 @@ public class CellTest {
 
     @Test
     void testConsturctorWithValidNumber() {
-        // Obtain a random number between 1 and 9.
+        // Obtain a random number in range [1, 9].
         int validNum = new Random().nextInt(9) + 1;
         Cell cell = new Cell(validNum);
         assertEquals(validNum, cell.result);
@@ -45,20 +45,25 @@ public class CellTest {
 
     @Test
     void testConsturctorWithInvalidNumber() {
-        int invalidNum = new Random().nextInt(9) + 10;
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            Cell cell = new Cell(invalidNum);
-        });
+        IllegalArgumentException exception
+                = assertThrows(IllegalArgumentException.class, () -> {
+                    // Obtain a random number outside range [1, 9].
+                    int invalidNum = 0;
+                    do {
+                        invalidNum = new Random().nextInt();
+                    } while (invalidNum >= 1 && invalidNum <= 9);
+                    Cell cell = new Cell(invalidNum);
+                });
         String expectedMessage = "between 1 and 9";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
-/*
+    /*
     @Test
     void testEquality() {
         Cell cell1 = new Cell(4);
         Cell cell2 = new Cell(4);
         assertEquals(cell1, cell2);
     }
-*/
+     */
 }
