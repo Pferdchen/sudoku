@@ -47,10 +47,11 @@ public class Normalizer {
     public static Integer[] normalize(Path path) throws IOException {
         Path puzzlePath = Objects.requireNonNull(path,
                 "The puzzle path can not be null");
+        String puzzleStr;
         try ( Stream<String> lines = Files.lines(puzzlePath)) {
-            String puzzleStr = lines.collect(Collectors.joining("\n"));
-            return normalize(puzzleStr);
+            puzzleStr = lines.collect(Collectors.joining("\n"));
         }
+        return normalize(puzzleStr);
     }
 
     public static Integer[] normalize(String puzzle) {

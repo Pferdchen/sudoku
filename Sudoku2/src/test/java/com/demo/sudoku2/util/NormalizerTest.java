@@ -89,19 +89,19 @@ public class NormalizerTest {
     }
 
     @Test
-    void testNormalizePath() throws IOException, URISyntaxException {
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource(sudokuTemplate).toURI());
-        assertArrayEquals(expectedPuzzle, normalize(path));
-    }
-
-    @Test
     void testNormalizeStream() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         try ( InputStream is = classLoader
                 .getResourceAsStream(sudokuTemplate)) {
             assertArrayEquals(expectedPuzzle, normalize(is));
         }
+    }
+
+    @Test
+    void testNormalizePath() throws IOException, URISyntaxException {
+        Path path = Paths.get(getClass().getClassLoader()
+                .getResource(sudokuTemplate).toURI());
+        assertArrayEquals(expectedPuzzle, normalize(path));
     }
 
     @AfterAll
