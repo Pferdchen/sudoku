@@ -91,6 +91,8 @@ public class SudokuTest {
     void testCalculate() {
         Sudoku sudoku = new Sudoku(validPuzzle);
         sudoku.calculate();
+        System.out.println("testCalculate");
+        System.out.println(sudoku);
         for (int i = 0; i < sudoku.getPuzzle().length; i++) {
             assertEquals(expectedSolution[i],
                     sudoku.getSolution().get(i).result);

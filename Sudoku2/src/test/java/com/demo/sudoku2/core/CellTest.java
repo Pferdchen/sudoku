@@ -18,7 +18,7 @@ public class CellTest {
         for (int i = 1; i <= 9; i++) {
             assertTrue(cell.suggestions.contains(i));
         }
-        assertTrue(cell.isEmpty());
+        assertTrue(cell.isSolved());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class CellTest {
         for (int i = 1; i <= 9; i++) {
             assertTrue(cell.suggestions.contains(i));
         }
-        assertTrue(cell.isEmpty());
+        assertTrue(cell.isSolved());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class CellTest {
         assertEquals(validNum, cell.result);
         assertTrue(cell.suggestions.size() == 1
                 && cell.suggestions.contains(validNum));
-        Assertions.assertFalse(cell.isEmpty());
+        Assertions.assertFalse(cell.isSolved());
     }
 
     @Test

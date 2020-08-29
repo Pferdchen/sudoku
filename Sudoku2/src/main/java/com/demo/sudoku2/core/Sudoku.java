@@ -39,7 +39,7 @@ public class Sudoku {
      * @param puzzle is an array of 81 {@code Integer}s.
      */
     public Sudoku(Integer[] puzzle) {
-        this.puzzle = Objects.requireNonNull(puzzle, 
+        this.puzzle = Objects.requireNonNull(puzzle,
                 "Input puzzle is an Integer array with 81 elements!");
         validateBefore();
         this.rows = new ArrayList<>();
@@ -94,7 +94,7 @@ public class Sudoku {
     private static boolean hasDuplicate(List<Cell> cells) {
         Set<Integer> intSet = new HashSet<>();
         for (Cell cell : cells) {
-            if (cell.result != null) {
+            if (!cell.isSolved()) {
                 if (intSet.contains(cell.result)) {
                     return true;
                 } else {
@@ -116,81 +116,83 @@ public class Sudoku {
     public void calculate() {
         for (int i = 0; i < 81; i++) {
             Cell cell = solution.get(i);
-            if (cell.result == null) {
-                Set<Integer> possibleValues = cell.suggestions;
-
+            // reduce suggestions for empty cell
+            if (cell.isSolved()) {
+                // scan its row for reducing its suggestions with other not
+                // empty cells in the row
                 int rowIdx = rowIndex(i);
-                rows.get(rowIdx).stream()
-                        .filter(c -> (c != cell && c.result != null))
-                        .forEach(c -> {
-                            possibleValues.remove(c.result);// remove in row
+                rows.get(rowIdx).stream().filter(c -> !c.isSolved())
+                        .forEach(other -> {
+                            cell.removeOneSuggestion(other.result);
                         });
 
+                // scan its column for reducing its suggestions with other not
+                // empty cells in the column
                 int columnIdx = columnIndex(i);
-                columns.get(columnIdx).stream()
-                        .filter(c -> (c != cell && c.result != null))
-                        .forEach(c -> {
-                            possibleValues.remove(c.result);// remove in column
+                columns.get(columnIdx).stream().filter(c -> !c.isSolved())
+                        .forEach(other -> {
+                            cell.removeOneSuggestion(other.result);
                         });
 
+                // scan its region for reducing its suggestions with other not
+                // empty cells in the region
                 int regionIdx = regionIndex(i);
-                regions.get(regionIdx).stream()
-                        .filter(c -> (c != cell && c.result != null))
-                        .forEach(c -> {
-                            possibleValues.remove(c.result);// remove in region
+                regions.get(regionIdx).stream().filter(c -> !c.isSolved())
+                        .forEach(other -> {
+                            cell.removeOneSuggestion(other.result);
                         });
 
-                reduceSets(i);
+                if (!cell.isSolved()) {
+                    reduceOtherSets(i);
+                }
             }
         }
     }
 
-    private void reduceSets(int i) {
-        Cell cell = solution.get(i);
-        Set<Integer> possibleValues = cell.suggestions;
-        if (possibleValues.size() == 1 && cell.result == null) {
-            cell.result = possibleValues.iterator().next();
-            reduceSetsInRows(i);
-            reduceSetsInColumns(i);
-            reduceSetsInRegion(i);
-        }
+    private void reduceOtherSets(int i) {
+        reduceOtherSetsInRows(i);
+        reduceOtherSetsInColumns(i);
+        reduceOtherSetsInRegion(i);
     }
 
-    private void reduceSetsInRows(int i) {
+    private void reduceOtherSetsInRows(int i) {
         Cell cell = solution.get(i);
         int rowIdx = rowIndex(i);
-        rows.get(rowIdx).stream()
-                .filter(c -> (c != cell && c.suggestions.size() > 1))
-                .forEach(c -> {
-                    c.suggestions.remove(cell.result);// reduce sets in row
-                    reduceSets(solution.indexOf(c));
+        rows.get(rowIdx).stream().filter(c -> c.isSolved())
+                .forEach(other -> {
+                    other.removeOneSuggestion(cell.result);
+                    if (!other.isSolved()) {
+                        reduceOtherSets(solution.indexOf(other));
+                    }
                 });
     }
 
-    private void reduceSetsInColumns(int i) {
+    private void reduceOtherSetsInColumns(int i) {
         Cell cell = solution.get(i);
         int columnIdx = columnIndex(i);
-        columns.get(columnIdx).stream()
-                .filter(c -> (c != cell && c.suggestions.size() > 1))
-                .forEach(c -> {
-                    c.suggestions.remove(cell.result);// reduce sets in column
-                    reduceSets(solution.indexOf(c));
+        columns.get(columnIdx).stream().filter(c -> c.isSolved())
+                .forEach(other -> {
+                    other.removeOneSuggestion(cell.result);
+                    if (!other.isSolved()) {
+                        reduceOtherSets(solution.indexOf(other));
+                    }
                 });
     }
 
-    private void reduceSetsInRegion(int i) {
+    private void reduceOtherSetsInRegion(int i) {
         Cell cell = solution.get(i);
         int regionIdx = regionIndex(i);
-        regions.get(regionIdx).stream()
-                .filter(c -> (c != cell && c.suggestions.size() > 1))
-                .forEach(c -> {
-                    c.suggestions.remove(cell.result);// reduce sets in region
-                    reduceSets(solution.indexOf(c));
+        regions.get(regionIdx).stream().filter(c -> c.isSolved())
+                .forEach(other -> {
+                    other.removeOneSuggestion(cell.result);
+                    if (!other.isSolved()) {
+                        reduceOtherSets(solution.indexOf(other));
+                    }
                 });
     }
 
     public boolean isSolved() {
-        return solution.stream().noneMatch(cell -> (cell.isEmpty()));
+        return solution.stream().noneMatch(cell -> (cell.isSolved()));
     }
 
     @Override

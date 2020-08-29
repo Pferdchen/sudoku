@@ -41,8 +41,20 @@ public class Cell {
         }
     }
 
-    public boolean isEmpty() {
+    public boolean isSolved() {
         return this.result == null;
+    }
+
+    public void removeOneSuggestion(Integer suggestion) {
+        if (!isSolved()) {
+            return;
+        }
+        if (suggestions.contains(suggestion)) {
+            suggestions.remove(suggestion);
+        }
+        if (suggestions.size() == 1) {
+            result = suggestions.iterator().next();
+        }
     }
 
     @Override
@@ -62,13 +74,10 @@ public class Cell {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
+        if (!(obj instanceof Cell)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cell other = (Cell) obj;
+        Cell other = (Cell) obj;
         return Objects.equals(this.result, other.result);
     }
 */
