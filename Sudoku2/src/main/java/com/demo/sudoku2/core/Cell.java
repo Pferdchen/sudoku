@@ -42,11 +42,11 @@ public class Cell {
     }
 
     public boolean isSolved() {
-        return this.result == null;
+        return result != null;
     }
 
     public void removeOneSuggestion(Integer suggestion) {
-        if (!isSolved()) {
+        if (isSolved()) {
             return;
         }
         if (suggestions.contains(suggestion)) {

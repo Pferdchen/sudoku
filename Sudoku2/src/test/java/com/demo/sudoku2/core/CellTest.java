@@ -3,6 +3,7 @@ package com.demo.sudoku2.core;
 import java.util.Random;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +19,7 @@ public class CellTest {
         for (int i = 1; i <= 9; i++) {
             assertTrue(cell.suggestions.contains(i));
         }
-        assertTrue(cell.isSolved());
+        assertFalse(cell.isSolved());
     }
 
     @Test
@@ -29,7 +30,7 @@ public class CellTest {
         for (int i = 1; i <= 9; i++) {
             assertTrue(cell.suggestions.contains(i));
         }
-        assertTrue(cell.isSolved());
+        assertFalse(cell.isSolved());
     }
 
     @Test
@@ -40,7 +41,7 @@ public class CellTest {
         assertEquals(validNum, cell.result);
         assertTrue(cell.suggestions.size() == 1
                 && cell.suggestions.contains(validNum));
-        Assertions.assertFalse(cell.isSolved());
+        Assertions.assertTrue(cell.isSolved());
     }
 
     @Test

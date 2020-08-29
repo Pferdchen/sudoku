@@ -94,7 +94,7 @@ public class Sudoku {
     private static boolean hasDuplicate(List<Cell> cells) {
         Set<Integer> intSet = new HashSet<>();
         for (Cell cell : cells) {
-            if (!cell.isSolved()) {
+            if (cell.isSolved()) {
                 if (intSet.contains(cell.result)) {
                     return true;
                 } else {
@@ -117,11 +117,11 @@ public class Sudoku {
         for (int i = 0; i < 81; i++) {
             Cell cell = solution.get(i);
             // reduce suggestions for empty cell
-            if (cell.isSolved()) {
+            if (!cell.isSolved()) {
                 // scan its row for reducing its suggestions with other not
                 // empty cells in the row
                 int rowIdx = rowIndex(i);
-                rows.get(rowIdx).stream().filter(c -> !c.isSolved())
+                rows.get(rowIdx).stream().filter(c -> c.isSolved())
                         .forEach(other -> {
                             cell.removeOneSuggestion(other.result);
                         });
@@ -129,7 +129,7 @@ public class Sudoku {
                 // scan its column for reducing its suggestions with other not
                 // empty cells in the column
                 int columnIdx = columnIndex(i);
-                columns.get(columnIdx).stream().filter(c -> !c.isSolved())
+                columns.get(columnIdx).stream().filter(c -> c.isSolved())
                         .forEach(other -> {
                             cell.removeOneSuggestion(other.result);
                         });
@@ -137,12 +137,12 @@ public class Sudoku {
                 // scan its region for reducing its suggestions with other not
                 // empty cells in the region
                 int regionIdx = regionIndex(i);
-                regions.get(regionIdx).stream().filter(c -> !c.isSolved())
+                regions.get(regionIdx).stream().filter(c -> c.isSolved())
                         .forEach(other -> {
                             cell.removeOneSuggestion(other.result);
                         });
 
-                if (!cell.isSolved()) {
+                if (cell.isSolved()) {
                     reduceOtherSets(i);
                 }
             }
@@ -158,10 +158,10 @@ public class Sudoku {
     private void reduceOtherSetsInRows(int i) {
         Cell cell = solution.get(i);
         int rowIdx = rowIndex(i);
-        rows.get(rowIdx).stream().filter(c -> c.isSolved())
+        rows.get(rowIdx).stream().filter(c -> !c.isSolved())
                 .forEach(other -> {
                     other.removeOneSuggestion(cell.result);
-                    if (!other.isSolved()) {
+                    if (other.isSolved()) {
                         reduceOtherSets(solution.indexOf(other));
                     }
                 });
@@ -170,10 +170,10 @@ public class Sudoku {
     private void reduceOtherSetsInColumns(int i) {
         Cell cell = solution.get(i);
         int columnIdx = columnIndex(i);
-        columns.get(columnIdx).stream().filter(c -> c.isSolved())
+        columns.get(columnIdx).stream().filter(c -> !c.isSolved())
                 .forEach(other -> {
                     other.removeOneSuggestion(cell.result);
-                    if (!other.isSolved()) {
+                    if (other.isSolved()) {
                         reduceOtherSets(solution.indexOf(other));
                     }
                 });
@@ -182,17 +182,17 @@ public class Sudoku {
     private void reduceOtherSetsInRegion(int i) {
         Cell cell = solution.get(i);
         int regionIdx = regionIndex(i);
-        regions.get(regionIdx).stream().filter(c -> c.isSolved())
+        regions.get(regionIdx).stream().filter(c -> !c.isSolved())
                 .forEach(other -> {
                     other.removeOneSuggestion(cell.result);
-                    if (!other.isSolved()) {
+                    if (other.isSolved()) {
                         reduceOtherSets(solution.indexOf(other));
                     }
                 });
     }
 
     public boolean isSolved() {
-        return solution.stream().noneMatch(cell -> (cell.isSolved()));
+        return solution.stream().noneMatch(cell -> (!cell.isSolved()));
     }
 
     @Override
