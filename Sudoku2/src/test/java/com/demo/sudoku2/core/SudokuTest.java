@@ -114,6 +114,16 @@ public class SudokuTest {
         assertTrue(sudoku.isSolved());
     }
 
+    @Test
+    void testEquality() {
+        Sudoku unsolvedSudoku1 = new Sudoku(validPuzzle);
+        Sudoku unsolvedSudoku2 = new Sudoku(validPuzzle);
+        assertEquals(unsolvedSudoku1, unsolvedSudoku2);
+        Sudoku solvedSudoku1 = new Sudoku(expectedSolution);
+        Sudoku solvedSudoku2 = new Sudoku(expectedSolution);
+        assertEquals(solvedSudoku1, solvedSudoku2);
+    }
+
     @AfterAll
     static void tearDown() {
         validPuzzle = null;
@@ -121,4 +131,5 @@ public class SudokuTest {
         puzzleWithWrongLength = null;
         puzzleWithDuplicate = null;
     }
+
 }

@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Sudoku {
 
@@ -34,7 +36,7 @@ public class Sudoku {
     private final List<List<Cell>> regions;
 
     /**
-     * Constructs a new sudoku with the given puzzle.
+     * Constructs a new Sudoku with the given puzzle.
      *
      * @param puzzle is an array of 81 {@code Integer}s.
      */
@@ -56,6 +58,7 @@ public class Sudoku {
         i = 0;
         while (i < 81) {
             Cell cell = new Cell(puzzle[i]);
+            cell.index = i;
             this.solution.add(cell);
             this.rows.get(rowIndex(i)).add(cell);
             this.columns.get(columnIndex(i)).add(cell);
@@ -114,81 +117,80 @@ public class Sudoku {
     }
 
     public void calculate() {
-        for (int i = 0; i < 81; i++) {
-            Cell cell = solution.get(i);
-            // reduce suggestions for empty cell
-            if (!cell.isSolved()) {
-                // scan its row for reducing its suggestions with other not
-                // empty cells in the row
-                int rowIdx = rowIndex(i);
-                rows.get(rowIdx).stream().filter(c -> c.isSolved())
-                        .forEach(other -> {
-                            cell.removeOneSuggestion(other.result);
-                        });
+        solution.stream().filter(unsolvedCellPredicate()).map(unsolvedCell -> {
+            reduceUnsolvedCellInRow(unsolvedCell);
+            reduceUnsolvedCellInColumn(unsolvedCell);
+            reduceUnsolvedCellInRegion(unsolvedCell);
+            return unsolvedCell;
+        }).filter(solvedCellPredicate()).forEachOrdered(solvedCell -> {
+            reduceOtherUnsolvedCells(solvedCell);
+        });
+    }
 
-                // scan its column for reducing its suggestions with other not
-                // empty cells in the column
-                int columnIdx = columnIndex(i);
-                columns.get(columnIdx).stream().filter(c -> c.isSolved())
-                        .forEach(other -> {
-                            cell.removeOneSuggestion(other.result);
-                        });
+    private void reduceUnsolvedCellInRow(Cell unsolvedCell) {
+        int rowIdx = rowIndex(unsolvedCell.index);
+        rows.get(rowIdx).stream().filter(solvedCellPredicate())
+                .forEach(reduceUnsolvedCellConsumer(unsolvedCell));
+    }
 
-                // scan its region for reducing its suggestions with other not
-                // empty cells in the region
-                int regionIdx = regionIndex(i);
-                regions.get(regionIdx).stream().filter(c -> c.isSolved())
-                        .forEach(other -> {
-                            cell.removeOneSuggestion(other.result);
-                        });
+    private void reduceUnsolvedCellInColumn(Cell unsolvedCell) {
+        int columnIdx = columnIndex(unsolvedCell.index);
+        columns.get(columnIdx).stream().filter(solvedCellPredicate())
+                .forEach(reduceUnsolvedCellConsumer(unsolvedCell));
+    }
 
-                if (cell.isSolved()) {
-                    reduceOtherSets(i);
-                }
+    private void reduceUnsolvedCellInRegion(Cell unsolvedCell) {
+        int regionIdx = regionIndex(unsolvedCell.index);
+        regions.get(regionIdx).stream().filter(solvedCellPredicate())
+                .forEach(reduceUnsolvedCellConsumer(unsolvedCell));
+    }
+
+    private static Predicate<Cell> solvedCellPredicate() {
+        return c -> c.isSolved();
+    }
+
+    private static Consumer<Cell> reduceUnsolvedCellConsumer(Cell unsolvedCell) {
+        return solvedCell -> {
+            unsolvedCell.removeOneSuggestion(solvedCell.result);
+        };
+    }
+
+    private void reduceOtherUnsolvedCells(Cell solvedCell) {
+        reduceOtherUnsolvedCellsInSameRow(solvedCell);
+        reduceOtherUnsolvedCellsInSameColumn(solvedCell);
+        reduceOtherUnsolvedCellsInSameRegion(solvedCell);
+    }
+
+    private void reduceOtherUnsolvedCellsInSameRow(Cell solvedCell) {
+        int rowIdx = rowIndex(solvedCell.index);
+        rows.get(rowIdx).stream().filter(unsolvedCellPredicate())
+                .forEach(reduceWithSolvedCellConsumer(solvedCell));
+    }
+
+    private void reduceOtherUnsolvedCellsInSameColumn(Cell solvedCell) {
+        int columnIdx = columnIndex(solvedCell.index);
+        columns.get(columnIdx).stream().filter(unsolvedCellPredicate())
+                .forEach(reduceWithSolvedCellConsumer(solvedCell));
+    }
+
+    private void reduceOtherUnsolvedCellsInSameRegion(Cell solvedCell) {
+        int regionIdx = regionIndex(solvedCell.index);
+        regions.get(regionIdx).stream().filter(unsolvedCellPredicate())
+                .forEach(reduceWithSolvedCellConsumer(solvedCell));
+    }
+
+    private static Predicate<Cell> unsolvedCellPredicate() {
+        return c -> !c.isSolved();
+    }
+
+    /*Be careful, it's non-static method as reduceUnsolvedCellConsumer() is*/
+    private Consumer<Cell> reduceWithSolvedCellConsumer(Cell solvedCell) {
+        return unsolvedCell -> {
+            unsolvedCell.removeOneSuggestion(solvedCell.result);
+            if (unsolvedCell.isSolved()) {
+                reduceOtherUnsolvedCells(unsolvedCell);
             }
-        }
-    }
-
-    private void reduceOtherSets(int i) {
-        reduceOtherSetsInRows(i);
-        reduceOtherSetsInColumns(i);
-        reduceOtherSetsInRegion(i);
-    }
-
-    private void reduceOtherSetsInRows(int i) {
-        Cell cell = solution.get(i);
-        int rowIdx = rowIndex(i);
-        rows.get(rowIdx).stream().filter(c -> !c.isSolved())
-                .forEach(other -> {
-                    other.removeOneSuggestion(cell.result);
-                    if (other.isSolved()) {
-                        reduceOtherSets(solution.indexOf(other));
-                    }
-                });
-    }
-
-    private void reduceOtherSetsInColumns(int i) {
-        Cell cell = solution.get(i);
-        int columnIdx = columnIndex(i);
-        columns.get(columnIdx).stream().filter(c -> !c.isSolved())
-                .forEach(other -> {
-                    other.removeOneSuggestion(cell.result);
-                    if (other.isSolved()) {
-                        reduceOtherSets(solution.indexOf(other));
-                    }
-                });
-    }
-
-    private void reduceOtherSetsInRegion(int i) {
-        Cell cell = solution.get(i);
-        int regionIdx = regionIndex(i);
-        regions.get(regionIdx).stream().filter(c -> !c.isSolved())
-                .forEach(other -> {
-                    other.removeOneSuggestion(cell.result);
-                    if (other.isSolved()) {
-                        reduceOtherSets(solution.indexOf(other));
-                    }
-                });
+        };
     }
 
     public boolean isSolved() {
@@ -198,6 +200,25 @@ public class Sudoku {
     @Override
     public String toString() {
         return solution.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.solution);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Sudoku)) {
+            return false;
+        }
+        Sudoku other = (Sudoku) obj;
+        return Objects.equals(this.solution, other.solution);
     }
 
 }

@@ -4,6 +4,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Attention! Class Cell implements own equal() and hashCode() methods. This
+ * means list.indexOf(cell) might not as usual as expected. Please use field
+ * index to get the index of a cell object in Sudoku.
+ */
 public class Cell {
 
     private static final Set<Integer> FULL_SUGGESTIONS
@@ -12,6 +17,8 @@ public class Cell {
     Integer result;
 
     Set<Integer> suggestions;
+
+    int index;
 
     /**
      * Constructs an empty cell with full suggestions.
@@ -61,7 +68,7 @@ public class Cell {
     public String toString() {
         return result == null ? null : result.toString();
     }
-/*
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -80,5 +87,5 @@ public class Cell {
         Cell other = (Cell) obj;
         return Objects.equals(this.result, other.result);
     }
-*/
+
 }
