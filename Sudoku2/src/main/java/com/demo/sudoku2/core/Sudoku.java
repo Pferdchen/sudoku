@@ -95,17 +95,11 @@ public class Sudoku {
     }
 
     private static boolean hasDuplicate(List<Cell> cells) {
-        Set<Integer> intSet = new HashSet<>();
-        for (Cell cell : cells) {
-            if (cell.isSolved()) {
-                if (intSet.contains(cell.result)) {
-                    return true;
-                } else {
-                    intSet.add(cell.result);
-                }
-            }
-        }
-        return false;
+        /* Since Cell implements own equal() and hashCode(). If set 
+        already contains the cell, set.add(cell) returns false.*/
+        Set<Cell> cellSet = new HashSet<>();
+        return cells.stream().filter(solvedCellPredicate())
+                .anyMatch(cell -> !cellSet.add(cell));
     }
 
     public Integer[] getPuzzle() {
