@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 100 100" width="100%" height="100%">
+
+    <title>Reusable Button</title>
+    <desc>Takes parameters from parent document's embedding element.</desc>
+
+    <defs id="defs-1">
+        <set xlink:href="#button_rect" attributeName="fill" to="param(color)" begin="0s" fill="freeze" />
+        <set xlink:href="#button_rect" attributeName="stroke" to="param(outline)" begin="0s" fill="freeze" />
+        <set xlink:href="#button_rect" attributeName="rx" to="param(corners)" begin="0s" fill="freeze" />
+        <set xlink:href="#button_rect" attributeName="ry" to="param(corners)" begin="0s" fill="freeze" />
+        <set xlink:href="#button_label" attributeName="???" to="param(text-label)" begin="0s" fill="freeze" />
+    </defs>
+
+    <g>
+        <rect id="button_rect" x="5" y="5" width="100" height="30" rx="15" ry="15" 
+              fill="blue" stroke="navy" />
+        <text id="button_label" x="55" y="30" text-anchor="middle" 
+              font-size="25" fill="black" font-family="Verdana"> 
+        </text>
+    </g>
+
+</svg>
