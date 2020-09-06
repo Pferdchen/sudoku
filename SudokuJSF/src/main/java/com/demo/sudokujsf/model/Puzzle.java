@@ -60,8 +60,8 @@ public class Puzzle implements Serializable {
 
     /**
      * Unidirectional OneToMany, No Inverse ManyToOne, No Join Table (JPA 2.x
-     * ONLY). I've used a Set rather than a List, because the solutions are not
-     * ordered.
+     * ONLY). Use a Set rather than a List, because the possible multiple
+     * solutions of one puzzle are not ordered.
      */
     @OneToMany
     @JoinColumn(name = "PUZZLE_ID", referencedColumnName = "ID")
