@@ -1,6 +1,7 @@
 package com.demo.sudokujsf.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  * JPA Entity for the Solution table
@@ -34,11 +32,9 @@ public class Solution implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 81, max = 81)
-    @Digits(fraction = 0, integer = 81)
-    @Pattern(regexp = "^([1-9]){81}$", message = "must contain 81 digits in [1..9]")
+    @NotEmpty(message = "Solution data may not be empty")
+    @Pattern(regexp = "^([1-9]){81}$",
+            message = "Solution data must contain 81 digits in [1..9]")
     @Column(name = "SOLUTION_DATA")
     private String solutionData;
 
@@ -70,6 +66,30 @@ public class Solution implements Serializable {
 
     public void setPuzzleId(long puzzleId) {
         this.puzzleId = puzzleId;
+    }
+
+    @Override
+    public String toString() {
+        return "Solution{" + "id=" + id + ", solutionData=" + solutionData + ", puzzleId=" + puzzleId + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Solution)) {
+            return false;
+        }
+        Solution other = (Solution) obj;
+        return Objects.equals(this.id, other.id);
     }
 
 }
