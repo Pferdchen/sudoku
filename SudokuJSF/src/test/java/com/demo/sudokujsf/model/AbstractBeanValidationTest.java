@@ -10,6 +10,9 @@ public abstract class AbstractBeanValidationTest {
 
     private static ValidatorFactory validatorFactory;
     static Validator validator;
+    static final String NULL_STRING = null;
+    static final String EMPTY_STRING = "";
+    static final String BLANK_STRING = " ";
 
     @BeforeAll
     public static void createValidator() {

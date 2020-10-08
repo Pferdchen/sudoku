@@ -73,7 +73,7 @@ public class PuzzleTest extends AbstractBeanValidationTest {
     public void whenNullName_thenOneConstraintViolation() {
         //given:
         puzzle.setId(VALID_PUZZLE_ID);
-        puzzle.setName(null);
+        puzzle.setName(NULL_STRING);
         puzzle.setPuzzleData(VALID_PUZZLE_DATA);
         //when:
         Set<ConstraintViolation<Puzzle>> violations = validator.validate(puzzle);
@@ -82,7 +82,7 @@ public class PuzzleTest extends AbstractBeanValidationTest {
         ConstraintViolation<Puzzle> violation = violations.iterator().next();
         assertThat("Name may not be empty", is(violation.getMessage()));
         assertThat("name", is(violation.getPropertyPath().toString()));
-        assertThat(null, is(violation.getInvalidValue()));
+        assertThat(violation.getInvalidValue(), nullValue());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class PuzzleTest extends AbstractBeanValidationTest {
     public void whenEmptyName_thenOneConstraintViolation() {
         //given:
         puzzle.setId(VALID_PUZZLE_ID);
-        puzzle.setName("");
+        puzzle.setName(EMPTY_STRING);
         puzzle.setPuzzleData(VALID_PUZZLE_DATA);
         //when:
         Set<ConstraintViolation<Puzzle>> violations = validator.validate(puzzle);
@@ -99,7 +99,24 @@ public class PuzzleTest extends AbstractBeanValidationTest {
         ConstraintViolation<Puzzle> violation = violations.iterator().next();
         assertThat("Name may not be empty", is(violation.getMessage()));
         assertThat("name", is(violation.getPropertyPath().toString()));
-        assertThat("", is(violation.getInvalidValue()));
+        assertThat(EMPTY_STRING, is(violation.getInvalidValue()));
+    }
+
+    @Test
+    @DisplayName("detect blank name")
+    public void whenBlankName_thenOneConstraintViolation() {
+        //given:
+        puzzle.setId(VALID_PUZZLE_ID);
+        puzzle.setName(BLANK_STRING);
+        puzzle.setPuzzleData(VALID_PUZZLE_DATA);
+        //when:
+        Set<ConstraintViolation<Puzzle>> violations = validator.validate(puzzle);
+        //then:
+        assertThat(violations.size(), is(1));
+        ConstraintViolation<Puzzle> violation = violations.iterator().next();
+        assertThat("Name may not be empty", is(violation.getMessage()));
+        assertThat("name", is(violation.getPropertyPath().toString()));
+        assertThat(BLANK_STRING, is(violation.getInvalidValue()));
     }
 
     @Test
@@ -108,7 +125,7 @@ public class PuzzleTest extends AbstractBeanValidationTest {
         //given:
         puzzle.setId(VALID_PUZZLE_ID);
         puzzle.setName(VALID_PUZZLE_NAME);
-        puzzle.setPuzzleData(null);
+        puzzle.setPuzzleData(NULL_STRING);
         //when:
         Set<ConstraintViolation<Puzzle>> violations = validator.validate(puzzle);
         //then:
@@ -121,23 +138,20 @@ public class PuzzleTest extends AbstractBeanValidationTest {
 
     @Test
     @DisplayName("detect empty puzzle data")
-    public void whenEmptyPuzzleData_then2ConstraintViolations() {
+    public void whenEmptyPuzzleData_thenOneConstraintViolation() {
         //given:
         puzzle.setId(VALID_PUZZLE_ID);
         puzzle.setName(VALID_PUZZLE_NAME);
-        puzzle.setPuzzleData("");
+        puzzle.setPuzzleData(EMPTY_STRING);
         //when:
         Set<ConstraintViolation<Puzzle>> violations = validator.validate(puzzle);
         //then:
-        assertThat(violations.size(), is(2));
-        for (final String message : new String[]{
-            "Puzzle data may not be empty",
-            "Puzzle data must contain 81 digits and spaces"}) {
-            assertThat("Puzzle should check contraint: " + message,
-                    violations.stream()
-                            .anyMatch(v -> v.getMessage().equals(message)),
-                    is(true));
-        }
+        assertThat(violations.size(), is(1));
+        ConstraintViolation<Puzzle> violation = violations.iterator().next();
+        assertThat("Puzzle data must contain 81 digits and spaces",
+                is(violation.getMessage()));
+        assertThat("puzzleData", is(violation.getPropertyPath().toString()));
+        assertThat(EMPTY_STRING, is(violation.getInvalidValue()));
     }
 
     @Test

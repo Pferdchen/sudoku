@@ -14,7 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -25,7 +26,8 @@ import javax.validation.constraints.Pattern;
  * </p>
  */
 @Entity
-@Table(name = "PUZZLE", uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
+@Table(name = "PUZZLE",
+        uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
 @NamedQueries({
     @NamedQuery(name = "Puzzle.findAll",
             query = "FROM Puzzle p ORDER BY p.id"),
@@ -45,11 +47,11 @@ public class Puzzle implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Name may not be empty")
+    @NotBlank(message = "Name may not be empty")
     @Column(name = "NAME")
     private String name;
 
-    @NotEmpty(message = "Puzzle data may not be empty")
+    @NotNull(message = "Puzzle data may not be empty")
     @Pattern(regexp = "^([1-9]|\\s){81}$",
             message = "Puzzle data must contain 81 digits and spaces")
     @Column(name = "PUZZLE_DATA")
@@ -98,7 +100,8 @@ public class Puzzle implements Serializable {
 
     @Override
     public String toString() {
-        return "Puzzle{" + "id=" + id + ", name=" + name + ", puzzleData=" + puzzleData + '}';
+        return "Puzzle{" + "id=" + id + ", name=" + name
+                + ", puzzleData=" + puzzleData + '}';
     }
 
     @Override

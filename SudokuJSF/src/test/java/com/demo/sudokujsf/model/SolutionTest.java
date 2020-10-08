@@ -47,13 +47,10 @@ public class SolutionTest extends AbstractBeanValidationTest {
                 = validator.validate(solution);
         //then:
         assertThat(violations.size(), is(1));
-        for (final String message : new String[]{
-            "Solution data may not be empty"}) {
-            assertThat("Solution should check constraint: " + message,
-                    violations.stream()
-                            .anyMatch(v -> v.getMessage().equals(message)),
-                    is(true));
-        }
+        ConstraintViolation<Solution> violation = violations.iterator().next();
+        assertThat("Solution data may not be empty", is(violation.getMessage()));
+        assertThat("solutionData", is(violation.getPropertyPath().toString()));
+        assertThat(violation.getInvalidValue(), nullValue());
     }
 
     @Test
@@ -75,7 +72,7 @@ public class SolutionTest extends AbstractBeanValidationTest {
     public void whenNullSolutionData_thenOneConstraintViolation() {
         //given:
         solution.setId(VALID_SOLUTION_ID);
-        solution.setSolutionData(null);
+        solution.setSolutionData(NULL_STRING);
         solution.setPuzzleId(VALID_PUZZLE_ID);
         //when:
         Set<ConstraintViolation<Solution>> violations
@@ -90,24 +87,21 @@ public class SolutionTest extends AbstractBeanValidationTest {
 
     @Test
     @DisplayName("detect empty solution data")
-    public void whenEmptySolutionData_then2ConstraintViolations() {
+    public void whenEmptySolutionData_thenOneConstraintViolation() {
         //given:
         solution.setId(VALID_SOLUTION_ID);
-        solution.setSolutionData("");
+        solution.setSolutionData(EMPTY_STRING);
         solution.setPuzzleId(VALID_PUZZLE_ID);
         //when:
         Set<ConstraintViolation<Solution>> violations
                 = validator.validate(solution);
         //then:
-        assertThat(violations.size(), is(2));
-        for (final String message : new String[]{
-            "Solution data may not be empty",
-            "Solution data must contain 81 digits in [1..9]"}) {
-            assertThat("Solution should check constraint: " + message,
-                    violations.stream()
-                            .anyMatch(v -> v.getMessage().equals(message)),
-                    is(true));
-        }
+        assertThat(violations.size(), is(1));
+        ConstraintViolation<Solution> violation = violations.iterator().next();
+        assertThat("Solution data must contain 81 digits in [1..9]",
+                is(violation.getMessage()));
+        assertThat("solutionData", is(violation.getPropertyPath().toString()));
+        assertThat(EMPTY_STRING, is(violation.getInvalidValue()));
     }
 
     @Test

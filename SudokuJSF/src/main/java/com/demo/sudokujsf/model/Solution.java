@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -20,7 +20,8 @@ import javax.validation.constraints.Pattern;
  * </p>
  */
 @Entity
-@Table(name = "SOLUTION", uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
+@Table(name = "SOLUTION",
+        uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
 public class Solution implements Serializable {
 
     /**
@@ -32,7 +33,7 @@ public class Solution implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Solution data may not be empty")
+    @NotNull(message = "Solution data may not be empty")
     @Pattern(regexp = "^([1-9]){81}$",
             message = "Solution data must contain 81 digits in [1..9]")
     @Column(name = "SOLUTION_DATA")
@@ -70,7 +71,8 @@ public class Solution implements Serializable {
 
     @Override
     public String toString() {
-        return "Solution{" + "id=" + id + ", solutionData=" + solutionData + ", puzzleId=" + puzzleId + '}';
+        return "Solution{" + "id=" + id + ", solutionData=" + solutionData
+                + ", puzzleId=" + puzzleId + '}';
     }
 
     @Override
