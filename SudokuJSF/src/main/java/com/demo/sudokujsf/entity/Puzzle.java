@@ -1,4 +1,4 @@
-package com.demo.sudokujsf.model;
+package com.demo.sudokujsf.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

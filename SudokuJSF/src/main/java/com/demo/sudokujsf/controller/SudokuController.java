@@ -1,7 +1,7 @@
 package com.demo.sudokujsf.controller;
 
 import com.demo.sudokujsf.data.PuzzleDao;
-import com.demo.sudokujsf.model.Puzzle;
+import com.demo.sudokujsf.entity.Puzzle;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;

@@ -1,9 +1,9 @@
-package com.demo.sudokujsf.model;
+package com.demo.sudokujsf.entity;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToStringExcluding​;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToStringExcluding;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import java.util.Set;
 import javax.validation.ConstraintViolation;

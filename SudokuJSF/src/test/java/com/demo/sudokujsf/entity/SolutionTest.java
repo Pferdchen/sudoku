@@ -1,4 +1,4 @@
-package com.demo.sudokujsf.model;
+package com.demo.sudokujsf.entity;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;

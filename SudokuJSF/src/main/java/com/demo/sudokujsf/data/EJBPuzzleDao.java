@@ -1,6 +1,6 @@
 package com.demo.sudokujsf.data;
 
-import com.demo.sudokujsf.model.Puzzle;
+import com.demo.sudokujsf.entity.Puzzle;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.inject.Inject;

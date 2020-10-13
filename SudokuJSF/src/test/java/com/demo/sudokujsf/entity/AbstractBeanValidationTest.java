@@ -1,4 +1,4 @@
-package com.demo.sudokujsf.model;
+package com.demo.sudokujsf.entity;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
