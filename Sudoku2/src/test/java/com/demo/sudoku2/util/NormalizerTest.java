@@ -14,12 +14,12 @@ import org.junit.jupiter.api.Test;
 
 public class NormalizerTest {
 
-    private static String sudokuTemplate;
+    private static String sudokuPuzzle;
     private static Integer[] expectedPuzzle;
 
     @BeforeAll
     static void init() {
-        sudokuTemplate = "templates/template1.txt";
+        sudokuPuzzle = "puzzles/puzzle1.txt";
         expectedPuzzle = new Integer[]{
             5, 3, null, null, 7, null, null, null, null,
             6, null, null, 1, 9, 5, null, null, null,
@@ -84,7 +84,7 @@ public class NormalizerTest {
     void testNormalizeFile() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader
-                .getResource(sudokuTemplate).getFile());
+                .getResource(sudokuPuzzle).getFile());
         assertArrayEquals(expectedPuzzle, normalize(file));
     }
 
@@ -92,7 +92,7 @@ public class NormalizerTest {
     void testNormalizeStream() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         try ( InputStream is = classLoader
-                .getResourceAsStream(sudokuTemplate)) {
+                .getResourceAsStream(sudokuPuzzle)) {
             assertArrayEquals(expectedPuzzle, normalize(is));
         }
     }
@@ -100,13 +100,13 @@ public class NormalizerTest {
     @Test
     void testNormalizePath() throws IOException, URISyntaxException {
         Path path = Paths.get(getClass().getClassLoader()
-                .getResource(sudokuTemplate).toURI());
+                .getResource(sudokuPuzzle).toURI());
         assertArrayEquals(expectedPuzzle, normalize(path));
     }
 
     @AfterAll
     static void tearDown() {
-        sudokuTemplate = null;
+        sudokuPuzzle = null;
         expectedPuzzle = null;
     }
 }
