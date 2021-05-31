@@ -15,9 +15,9 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <sudoku2.version>1.0-SNAPSHOT</sudoku2.version>
         <jakartaee.version>8.0.0</jakartaee.version>
-        <microprofile.version>3.3</microprofile.version>
-        <junit-jupiter.version>5.7.0</junit-jupiter.version>
-        <mockito-core.version>3.5.5</mockito-core.version>
+        <microprofile.version>4.0.1</microprofile.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <mockito-core.version>3.10.0</mockito-core.version>
     </properties>
 
     <dependencies>
@@ -61,28 +61,28 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.17.2</version>
+            <version>3.19.0</version>
             <scope>test</scope>
         </dependency>
         <!-- Test Bean Constructor, Setter/Getter, hashCode, equal, toString -->
         <dependency>
             <groupId>com.google.code.bean-matchers</groupId>
             <artifactId>bean-matchers</artifactId>
-            <version>0.12</version>
+            <version>0.13</version>
             <scope>test</scope>
         </dependency>
         <!-- Test Bean Validation -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.6.Final</version>
+            <version>7.0.1.Final</version>
             <scope>test</scope>
         </dependency>
         <!-- Hibernate Validator requires Expression Language dependency -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <version>3.0.3</version>
+            <version>4.0.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
