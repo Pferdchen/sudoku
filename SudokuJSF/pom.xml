@@ -71,18 +71,18 @@
             <version>0.13</version>
             <scope>test</scope>
         </dependency>
-        <!-- Test Bean Validation -->
+        <!-- Test Bean Validation, 7.0.0.Final & 7.0.1.Final have error -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.1.Final</version>
+            <version>6.2.0.Final</version>
             <scope>test</scope>
         </dependency>
-        <!-- Hibernate Validator requires Expression Language dependency -->
+        <!-- Hibernate Validator requires Expression Language dependency, 4.0.0 & 4.0.1 have error -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <version>4.0.1</version>
+            <version>3.0.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
