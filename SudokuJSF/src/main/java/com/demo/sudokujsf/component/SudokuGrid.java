@@ -1,10 +1,10 @@
 package com.demo.sudokujsf.component;
 
 import java.io.IOException;
-import javax.faces.component.FacesComponent;
-import javax.faces.component.UIOutput;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.component.UIOutput;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
 
 @FacesComponent(createTag = true, namespace = "https://sudokujsf.com/demo",
         tagName = "sudoku-grid", value = "com.demo.sudokujsf.component.SudokuGrid")

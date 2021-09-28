@@ -2,9 +2,9 @@ package com.demo.sudokujsf.data;
 
 import com.demo.sudokujsf.entity.Puzzle;
 import java.util.List;
-import javax.ejb.Stateful;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 @Stateful
 public class EJBPuzzleDao implements PuzzleDao {
