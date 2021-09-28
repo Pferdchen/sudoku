@@ -1,10 +1,10 @@
 # sudoku repository
 
-Design and implement a sudoku algorithm with Java Swing and AWT or JavaFX.
+Design and implement a sudoku algorithm with JavaFX or JSF.
 
 ## ~~Sudoku deprecated~~
 
-A basic sudoku algorithm. Learn new features of JDK 13.
+A basic sudoku algorithm. Learn new features of JDK 17.
 
 ## Sudoku2
 
@@ -16,14 +16,14 @@ A Modular-Maven project for sudoku core.
 
 ## ~~SudokuFX deprecated~~
 
-Design and implement a sudoku algorithm with [JavaFX 14](https://openjfx.io/openjfx-docs/).
+Design and implement a sudoku algorithm with [JavaFX 16](https://openjfx.io/openjfx-docs/).
 
 [JavaFX](https://openjfx.io/openjfx-docs/) builds on top of JDK and is a standalone component. There are 2 different options for developing JavaFX applications:
 
 * Use the JavaFX SDK
 * Use a build system (e.g. maven/gradle) to download the required modules from Maven Central.
 
-For both options, it is required to have a recent version of JDK 14, or at least JDK 11.
+For both options, it is required to have a recent version of JDK 16, or at least JDK 11.
 
 ## SudokuFX2
 
