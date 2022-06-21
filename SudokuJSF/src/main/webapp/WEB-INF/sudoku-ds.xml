@@ -3,8 +3,9 @@
 or testing only. It uses H2, a lightweight, in-memory, example database that
 ships with JBoss EAP. It is not robust or scalable, is not supported,
 and should NOT be used in a production environment! -->
-<datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:noNamespaceSchemaLocation="http://www.ironjacamar.org/schema/datasources_1_0.xsd">
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
     <!-- The datasource is bound into JNDI at this location. We reference
     this in META-INF/persistence.xml -->
     <datasource jndi-name="java:/SudokuDS"
