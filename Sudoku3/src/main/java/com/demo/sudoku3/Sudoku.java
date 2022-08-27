@@ -136,7 +136,7 @@ public class Sudoku {
      *
      * @param index index of cell
      * @param num2 binary form corresponds to a number
-     * @return
+     * @return {@code true} means that the number can be added
      */
     private boolean setNumPri(int index, int num2) {
         int row = index / 9;
@@ -159,14 +159,14 @@ public class Sudoku {
      */
     private int findMinCell() {
         int i = 0;
-        int c;
-        int tP = -1;
-        int tMin = 20;
+        int countOf1sInCell;
+        int tP = -1;//init position of min. cell
+        int tMin = 20;//init quantity of possibilities in min. cell
 
         do {
             if (_num[i] > 0) {
-                c = get1Count(_num[i]);
-                if (c == 1) {
+                countOf1sInCell = get1Count(_num[i]);
+                if (countOf1sInCell == 1) {
                     if (!setNumPri(i, _num[i])) {
                         return -2;
                     }
@@ -180,9 +180,9 @@ public class Sudoku {
 
                     i = -1;
                 } else {
-                    if (c < tMin) {
+                    if (countOf1sInCell < tMin) {
                         tP = i;
-                        tMin = c;
+                        tMin = countOf1sInCell;
                     }
                 }
             }
@@ -193,8 +193,8 @@ public class Sudoku {
     }
 
     public int[] calculate() {
-        Stack<List<Integer>> q = new Stack<>();
-        List<Integer> l;
+        Stack<List<Integer>> stackOfCaches = new Stack<>();
+        List<Integer> cache;
 
         _s = new StringBuilder();
         appendString("Init Matrix");
@@ -204,40 +204,45 @@ public class Sudoku {
 
         while (k != -1) {
             if (k == -2) {
-                if (q.isEmpty()) {
+                if (stackOfCaches.isEmpty()) {
                     appendString("Error!!!!!", false);
                     return null;
                 }
 
-                l = q.pop();
+                cache = stackOfCaches.pop();
 
-                k = l.get(82);
-                l.remove(82);
+                k = cache.get(82);
+                cache.remove(82);
 
-                i = l.get(81) + 1;
-                l.remove(81);
+                i = cache.get(81) + 1;
+                cache.remove(81);
 
-                appendString("Stack Pop " + (q.size() + 1), false);
-                restoreNum(l);
+                appendString("Stack Pop " + (stackOfCaches.size() + 1), false);
+                restoreNum(cache);
 
-                k = findNextK(q, l, k, i);
+                k = findNextK(stackOfCaches, cache, k, i);
             } else {
-                l = new ArrayList<>();
-                l.addAll(Arrays.stream(_num).boxed().collect(Collectors.toList()));
+                cache = new ArrayList<>();
+                cache.addAll(Arrays.stream(_num).boxed().collect(Collectors.toList()));
 
-                k = findNextK(q, l, k, 1);
+                k = findNextK(stackOfCaches, cache, k, 1);
             }
         }
 
         appendString("Calculating Complete!!!!");
 
-        int[] v = new int[81];
+        int[] solution = new int[81];
         for (i = 0; i < 81; i++) {
-            v[i] = -_num[i];
+            solution[i] = -_num[i];
         }
-        return v;
+        return solution;
     }
 
+    /**
+     * Restores Sudoku from a state.
+     *
+     * @param l
+     */
     private void restoreNum(List<Integer> l) {
         for (int i = 0; i < 81; i++) {
             _num[i] = l.get(i);
@@ -261,39 +266,48 @@ public class Sudoku {
      */
     private int getPossibleNumInCell(int cellNum, int indexOfPossibilities) {
         int k = 0;
-        for (int i = 0; i < 9; i++) {
-            if ((_v[i] & cellNum) != 0) {
+        for (int indexOfV = 0; indexOfV < 9; indexOfV++) {
+            if ((_v[indexOfV] & cellNum) != 0) {
                 k += 1;
                 if (k == indexOfPossibilities) {
-                    return i + 1;
+                    return indexOfV + 1;
                 }
             }
         }
         return -1;
     }
 
-    private int findNextK(Stack<List<Integer>> q, List<Integer> l, int k, int index) {
-        int j = getPossibleNumInCell(_num[k], index);
+    /**
+     *
+     * @param stackOfCaches a stack for caching the current state of Sudoku or
+     * restoring the last state of Sudoku
+     * @param cache
+     * @param k
+     * @param indexOfPossibilities
+     * @return -1, -2, 0-80
+     */
+    private int findNextK(Stack<List<Integer>> stackOfCaches, List<Integer> cache, int k, int indexOfPossibilities) {
+        int possibleNum = getPossibleNumInCell(_num[k], indexOfPossibilities);
 
-        while (j != -1) {
-            if (setNumPri(k, _v[j - 1])) {
-                appendString("Stack Push " + (q.size() + 1), false);
+        while (possibleNum != -1) {
+            if (setNumPri(k, _v[possibleNum - 1])) {
+                appendString("Stack Push " + (stackOfCaches.size() + 1), false);
                 appendString("SetNum MayBe " + indexToXY(k));
 
-                l.add(index);//????
-                l.add(k);//????
-                q.push(l);
+                cache.add(indexOfPossibilities);//l[81]
+                cache.add(k);//l[82], quantity of possibilities
+                stackOfCaches.push(cache);
 
                 k = findMinCell();
 
                 break;
             }
 
-            restoreNum(l);
-            index += 1;
-            j = getPossibleNumInCell(_num[k], index);
+            restoreNum(cache);
+            indexOfPossibilities += 1;
+            possibleNum = getPossibleNumInCell(_num[k], indexOfPossibilities);
         }
-        if (j == -1) {
+        if (possibleNum == -1) {
             k = -2;
         }
         return k;
