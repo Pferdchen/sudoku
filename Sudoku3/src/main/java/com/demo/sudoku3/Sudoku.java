@@ -61,12 +61,17 @@ public class Sudoku {
     }
 
     /**
+     * Removes a number at cell position (row, col) with help of ones'
+     * complement of the removed number.
      *
      * @param row
      * @param col
      * @param onesComplement ones' complement of removed number
-     * @return cell state, that does not contain the removed number. 0 means
-     * unsolved cell.
+     * @return cell state. The number in binary form does not contain the bit
+     * corresponding the removed number. 0 means empty cell. The last possible
+     * number is removed and the cell has no possible numbers any more. Empty
+     * cell means unsolved cell. The last state of Sudoku should be restored
+     * from the stack.
      */
     private int removeNum(int row, int col, int onesComplement) {
         int index = row * 9 + col;
@@ -96,6 +101,9 @@ public class Sudoku {
     }
 
     /**
+     * Sets a fixed number at cell position (row, col) and removes the same
+     * number from its row, column and region except self. The fixed number is
+     * stored as its negative number.
      *
      * @param row
      * @param col
@@ -107,7 +115,7 @@ public class Sudoku {
             return false;
         }
         _num[row * 9 + col] = -(indexOfV + 1);// set result with negative number
-        int onesComplement = _v[9] - _v[indexOfV];
+        int onesComplement = _v[9] - _v[indexOfV];// ones' complement of the number to be removed
 
         for (int i = 0; i < 9; i++) {
             if (removeNum(i, col, onesComplement) == 0) {
@@ -211,10 +219,10 @@ public class Sudoku {
 
                 cache = stackOfCaches.pop();
 
-                k = cache.get(82);
+                k = cache.get(82);//index of first min cell
                 cache.remove(82);
 
-                i = cache.get(81) + 1;
+                i = cache.get(81) + 1;//index of next possible number in the min cell
                 cache.remove(81);
 
                 appendString("Stack Pop " + (stackOfCaches.size() + 1), false);
@@ -281,36 +289,38 @@ public class Sudoku {
      *
      * @param stackOfCaches a stack for caching the current state of Sudoku or
      * restoring the last state of Sudoku
-     * @param cache
-     * @param k
-     * @param indexOfPossibilities
+     * @param cache contains 81 numbers of Sudoku before pushing
+     * @param indexOfMinCell index of the first min cell
+     * @param indexOfPossibilities index of possible number in the min cell,
+     * starts from 1
      * @return -1, -2, 0-80
      */
-    private int findNextK(Stack<List<Integer>> stackOfCaches, List<Integer> cache, int k, int indexOfPossibilities) {
-        int possibleNum = getPossibleNumInCell(_num[k], indexOfPossibilities);
+    private int findNextK(Stack<List<Integer>> stackOfCaches, List<Integer> cache,
+            int indexOfMinCell, int indexOfPossibilities) {
+        int possibleNum = getPossibleNumInCell(_num[indexOfMinCell], indexOfPossibilities);
 
         while (possibleNum != -1) {
-            if (setNumPri(k, _v[possibleNum - 1])) {
+            if (setNumPri(indexOfMinCell, _v[possibleNum - 1])) {
                 appendString("Stack Push " + (stackOfCaches.size() + 1), false);
-                appendString("SetNum MayBe " + indexToXY(k));
+                appendString("SetNum MayBe " + indexToXY(indexOfMinCell));
 
                 cache.add(indexOfPossibilities);//l[81]
-                cache.add(k);//l[82], quantity of possibilities
+                cache.add(indexOfMinCell);//l[82]
                 stackOfCaches.push(cache);
 
-                k = findMinCell();
+                indexOfMinCell = findMinCell();
 
                 break;
             }
 
             restoreNum(cache);
-            indexOfPossibilities += 1;
-            possibleNum = getPossibleNumInCell(_num[k], indexOfPossibilities);
+            indexOfPossibilities += 1;//index of next possible number in the min cell
+            possibleNum = getPossibleNumInCell(_num[indexOfMinCell], indexOfPossibilities);
         }
         if (possibleNum == -1) {
-            k = -2;
+            indexOfMinCell = -2;
         }
-        return k;
+        return indexOfMinCell;
     }
 
     private String returnNumString(int num) {
@@ -362,8 +372,8 @@ public class Sudoku {
     }
 
     public static void main(String[] args) {
-        resolve();
-        //resolve2();
+        //resolve();
+        resolve2();
     }
 
     private static void resolve() {
