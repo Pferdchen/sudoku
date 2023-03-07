@@ -30,11 +30,11 @@ import jakarta.validation.constraints.Pattern;
         uniqueConstraints = @UniqueConstraint(columnNames = "ID"))
 @NamedQueries({
     @NamedQuery(name = "Puzzle.findAll",
-            query = "FROM Puzzle p ORDER BY p.id"),
+            query = "SELECT p FROM Puzzle p ORDER BY p.id"),
     @NamedQuery(name = "Puzzle.findById",
-            query = "FROM Puzzle p WHERE p.id = :id"),
+            query = "SELECT p FROM Puzzle p WHERE p.id = :id"),
     @NamedQuery(name = "Puzzle.findAllWithName",
-            query = "FROM Puzzle p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+            query = "SELECT p FROM Puzzle p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
 })
 public class Puzzle implements Serializable {
 
