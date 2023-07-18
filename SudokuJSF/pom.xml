@@ -16,8 +16,8 @@
         <sudoku2.version>1.0-SNAPSHOT</sudoku2.version>
         <jakartaee.version>10.0.0</jakartaee.version>
         <microprofile.version>6.0</microprofile.version>
-        <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <mockito-core.version>5.1.1</mockito-core.version>
+        <junit-jupiter.version>5.10.0-RC1</junit-jupiter.version>
+        <mockito-core.version>5.4.0</mockito-core.version>
     </properties>
 
     <dependencies>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>8.0.0.Final</version>
+            <version>8.0.1.Final</version>
             <scope>test</scope>
         </dependency>
         <!-- Hibernate Validator requires Expression Language dependency -->
@@ -104,7 +104,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <phase>validate</phase>
@@ -136,11 +136,11 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.1.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.1.2</version>
             </plugin>
         </plugins>
     </build>
