@@ -56,6 +56,14 @@
             <version>${jakartaee.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Used for avoiding stylecheck error in xhtml in netbeans, only if no
+        dependency of PrimeFaces. Updating to version 4.0.4 is not useful. -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>2.3.21</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- The Eclipse MicroProfile project is aimed at optimizing Enterprise
         Java for the microservices architecture -->
