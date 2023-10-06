@@ -534,6 +534,260 @@
         <path fill="none" stroke="rgb(0,0,0)" d="M 13136,12060 L 13333,12060"/>
         <path fill="none" stroke="rgb(0,0,0)" d="M 13460,12060 L 13500,12060"/>
     </g>
-    <!-- draw 81 numbers in programm -->
-    {NUMBER_BLOCK}
+    <!-- 81 numbers -->
+    <g font-size="1129px" font-style="normal" font-weight="400">
+        <!-- row 1 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="1600">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="1600">9</text>
+        </g>
+        <!-- row 2 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="3047">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="3047">9</text>
+        </g>
+        <!-- row 3 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="4494">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="4494">9</text>
+        </g>
+        <!-- row 4 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="5941">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="5941">9</text>
+        </g>
+        <!-- row 5 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="7388">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="7388">9</text>
+        </g>
+        <!-- row 6 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="8835">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="8835">9</text>
+        </g>
+        <!-- row 7 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="10282">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="10282">9</text>
+        </g>
+        <!-- row 8 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="11729">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="11729">9</text>
+        </g>
+        <!-- row 9 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="13176">9</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="13176">9</text>
+        </g>
+        <!-- End row -->
+    </g>
 </svg>

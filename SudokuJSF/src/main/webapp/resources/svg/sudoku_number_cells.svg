@@ -534,6 +534,260 @@
         <path fill="none" stroke="rgb(0,0,0)" d="M 13136,12060 L 13333,12060"/>
         <path fill="none" stroke="rgb(0,0,0)" d="M 13460,12060 L 13500,12060"/>
     </g>
-    <!-- draw 81 numbers in programm -->
-    {NUMBER_BLOCK}
+    <!-- 81 numbers -->
+    <g font-size="1129px" font-style="normal" font-weight="400">
+        <!-- row 1 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="1600">{CELL0}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="1600">{CELL1}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="1600">{CELL2}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="1600">{CELL3}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="1600">{CELL4}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="1600">{CELL5}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="1600">{CELL6}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="1600">{CELL7}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="1600">{CELL8}</text>
+        </g>
+        <!-- row 2 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="3047">{CELL9}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="3047">{CELL10}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="3047">{CELL11}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="3047">{CELL12}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="3047">{CELL13}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="3047">{CELL14}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="3047">{CELL15}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="3047">{CELL16}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="3047">{CELL17}</text>
+        </g>
+        <!-- row 3 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="4494">{CELL18}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="4494">{CELL19}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="4494">{CELL20}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="4494">{CELL21}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="4494">{CELL22}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="4494">{CELL23}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="4494">{CELL24}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="4494">{CELL25}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="4494">{CELL26}</text>
+        </g>
+        <!-- row 4 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="5941">{CELL27}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="5941">{CELL28}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="5941">{CELL29}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="5941">{CELL30}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="5941">{CELL31}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="5941">{CELL32}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="5941">{CELL33}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="5941">{CELL34}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="5941">{CELL35}</text>
+        </g>
+        <!-- row 5 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="7388">{CELL36}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="7388">{CELL37}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="7388">{CELL38}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="7388">{CELL39}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="7388">{CELL40}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="7388">{CELL41}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="7388">{CELL42}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="7388">{CELL43}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="7388">{CELL44}</text>
+        </g>
+        <!-- row 6 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="8835">{CELL45}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="8835">{CELL46}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="8835">{CELL47}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="8835">{CELL48}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="8835">{CELL49}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="8835">{CELL50}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="8835">{CELL51}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="8835">{CELL52}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="8835">{CELL53}</text>
+        </g>
+        <!-- row 7 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="10282">{CELL54}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="10282">{CELL55}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="10282">{CELL56}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="10282">{CELL57}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="10282">{CELL58}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="10282">{CELL59}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="10282">{CELL60}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="10282">{CELL61}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="10282">{CELL62}</text>
+        </g>
+        <!-- row 8 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="11729">{CELL63}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="11729">{CELL64}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="11729">{CELL65}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="11729">{CELL66}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="11729">{CELL67}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="11729">{CELL68}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="11729">{CELL69}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="11729">{CELL70}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="11729">{CELL71}</text>
+        </g>
+        <!-- row 9 -->
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="939" y="13176">{CELL72}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="2384" y="13176">{CELL73}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="3829" y="13176">{CELL74}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="5274" y="13176">{CELL75}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="6719" y="13176">{CELL76}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="8164" y="13176">{CELL77}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="9609" y="13176">{CELL78}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="11054" y="13176">{CELL79}</text>
+        </g>
+        <g fill="rgb(0,0,0)" stroke="none">
+            <text x="12499" y="13176">{CELL80}</text>
+        </g>
+        <!-- End row -->
+    </g>
 </svg>

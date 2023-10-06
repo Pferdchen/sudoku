@@ -7,9 +7,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.context.ResponseWriter;
 import jakarta.faces.render.FacesRenderer;
 import jakarta.faces.render.Renderer;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -45,6 +43,7 @@ public class SudokuSVGRenderer extends Renderer {
      *
      * @param context <code>FacesContext</code>for the current request
      * @param component <code>UIComponent</code> to be decoded
+     * @throws java.io.IOException
      */
     @Override
     public void encodeBegin(FacesContext context, UIComponent component)
@@ -89,7 +88,7 @@ public class SudokuSVGRenderer extends Renderer {
         String svgTemplate = readSVGTemplate("/resources/svg/sudoku.svg");
 
         // Replace the placeholder with the component attribute value
-        String svgContent = replacePlaceholder(svgTemplate, component);
+        String svgContent = drawNumbers(svgTemplate, component);
 
         // Render the modified SVG content
         ResponseWriter writer = context.getResponseWriter();
@@ -108,14 +107,64 @@ public class SudokuSVGRenderer extends Renderer {
         return result.toString(StandardCharsets.UTF_8.name());
     }
 
-    private String replacePlaceholder(String svgTemplate, UIComponent component) {
+    /**
+     * Regex for replacing XML comments
+     * <pre>
+     * {@code
+     * <!--(?!-?>)(?:[^<-]|<(?!!--(?!>))|-(?!-!>))*?(?<!<!-)-->
+     * }
+     * </pre>
+     *
+     * @see https://skeptric.com/html-comment-regexp/index.html
+     */
+    private static final String XML_COMMENT_REGEX
+            = "<!--(?!-?>)(?:[^<-]|<(?!!--(?!>))|-(?!-!>))*?(?<!<!-)-->";
+
+    /**
+     * <pre>
+     * {@code
+     * <g font-size="1129px" font-style="normal" font-weight="400">
+     * }
+     * </pre>
+     */
+    private static final String NUMBER_BLOCK_BEGIN
+            = "<g font-size=\"1129px\" font-style=\"normal\" font-weight=\"400\">";
+
+    /**
+     * <pre>
+     * {@code
+     * <g fill="rgb(0,0,0)" stroke="none">
+     *     <text x="939" y="1600">{CELL0}</text>
+     * </g>
+     * }
+     * </pre>
+     */
+    private static final String X_Y_FORMAT
+            = "<g fill=\"rgb(0,0,0)\" stroke=\"none\">"
+            + "<text x=\"%d\" y=\"%d\">%c</text>"
+            + "</g>";
+
+    private static final int START_X = 900;
+
+    private static final int START_Y = 1600;
+
+    private static final String NUMBER_BLOCK_END = "</g>";
+
+    private static final String NUMBER_BLOCK_PLACEHOLDER = "{NUMBER_BLOCK}";
+
+    private String drawNumbers(String svgTemplate, UIComponent component) {
+        String result = svgTemplate.replaceAll(XML_COMMENT_REGEX, "");
         SudokuSVG sudokuSVG = (SudokuSVG) component;
         String puzzleString = (String) sudokuSVG.getValue();
+        StringBuilder numbers = new StringBuilder(NUMBER_BLOCK_BEGIN);
         for (int i = 0; i < puzzleString.length(); i++) {
-            String placeholder = "{CELL" + i + "}";
-            svgTemplate = svgTemplate.replace(placeholder, String.valueOf(puzzleString.charAt(i)));
+            int x = START_X + 1445 * (i % 9);
+            int y = START_Y + 1447 * (i / 9);
+            String n = String.format(X_Y_FORMAT, x, y, puzzleString.charAt(i));
+            numbers.append(n);
         }
-        return svgTemplate;
+        numbers.append(NUMBER_BLOCK_END);
+        return result.replace(NUMBER_BLOCK_PLACEHOLDER, numbers.toString());
     }
 
 }
