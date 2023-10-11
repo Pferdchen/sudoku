@@ -37,7 +37,6 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-
 package renderkits.renderkit.svg;
 
 import jakarta.faces.FacesException;
@@ -63,26 +62,26 @@ import renderkits.util.ByteArrayGuard;
 import renderkits.util.Util;
 
 /**
- * <p><strong>SVGResponseStateManager</strong> is the helper class to
+ * <p>
+ * <strong>SVGResponseStateManager</strong> is the helper class to
  * {@link javax.faces.application.StateManager} that knows the specific
- * rendering technology being used to generate the response.  This class
- * will write out state using hidden <code>SVG <text></code> elements.
+ * rendering technology being used to generate the response. This class will
+ * write out state using hidden <code>SVG</code> elements.
  */
 public class SVGResponseStateManager extends ResponseStateManager {
 
     //
     // Protected Constants
     //
-
     // Log instance for this class
-    private static final Logger logger =
-          Util.getLogger(Util.FACES_LOGGER + Util.RENDERKIT_LOGGER);
+    private static final Logger logger
+            = Util.getLogger(Util.FACES_LOGGER + Util.RENDERKIT_LOGGER);
 
-    private static final String FACES_VIEW_STATE =
-          "com.sun.faces.FACES_VIEW_STATE";
+    private static final String FACES_VIEW_STATE
+            = "com.sun.faces.FACES_VIEW_STATE";
 
-    private static final String COMPRESS_STATE_PARAM =
-          "com.sun.faces.COMPRESS_STATE";
+    private static final String COMPRESS_STATE_PARAM
+            = "com.sun.faces.COMPRESS_STATE";
     //
     // Class Variables
     //
@@ -96,13 +95,10 @@ public class SVGResponseStateManager extends ResponseStateManager {
     //
     // Ivars used during actual client lifetime
     //
-
     // Relationship Instance Variables
-
     //
     // Constructors and Initializers    
     //
-
     public SVGResponseStateManager() {
         super();
         byteArrayGuard = new ByteArrayGuard();
@@ -111,29 +107,29 @@ public class SVGResponseStateManager extends ResponseStateManager {
     //
     // Class methods
     //
-
     //
     // General Methods
     //
-
     //
     // Methods From ResponseStateManager
     //
-
+    @Override
     public Object getState(FacesContext context, String viewId) {
         Object stateArray[] = {getTreeStructure(context, viewId),
-                               getComponentState(context)};
+            getComponentState(context)};
         return stateArray;
     }
 
+    @Override
     public boolean isPostback(FacesContext context) {
         boolean result = context.getExternalContext().getRequestParameterMap().
-              containsKey(javax.faces.render.ResponseStateManager.VIEW_STATE_PARAM);
+                containsKey(jakarta.faces.render.ResponseStateManager.VIEW_STATE_PARAM);
         return result;
     }
 
+    @Override
     public void writeState(FacesContext context,
-                           Object state) throws IOException {
+            Object state) throws IOException {
         SerializedView view = null;
         if (state instanceof SerializedView) {
             view = (SerializedView) state;
@@ -141,46 +137,45 @@ public class SVGResponseStateManager extends ResponseStateManager {
             if (state instanceof Object[]) {
                 Object[] stateArray = (Object[]) state;
                 if (2 == stateArray.length) {
-                    StateManager stateManager =
-                          context.getApplication().getStateManager();
+                    StateManager stateManager
+                            = context.getApplication().getStateManager();
                     view = new SerializedView(stateArray[0],
-                                              stateArray[1]);
+                            stateArray[1]);
                 } else {
                     //PENDING - I18N
                     if (logger.isLoggable(Level.SEVERE)) {
                         logger.log(Level.SEVERE,
-                                   "State is not an expected array of length 2.");
+                                "State is not an expected array of length 2.");
                     }
                     throw new IOException(
-                          "State is not an expected array of length 2.");
+                            "State is not an expected array of length 2.");
                 }
             } else {
                 //PENDING - I18N
                 if (logger.isLoggable(Level.SEVERE)) {
                     logger.log(Level.SEVERE,
-                               "State is not an expected array of length 2.");
+                            "State is not an expected array of length 2.");
                 }
                 throw new IOException(
-                      "State is not an expected array of length 2.");
+                        "State is not an expected array of length 2.");
             }
         }
         writeState(context, view);
     }
 
     private void writeState(FacesContext context, SerializedView view)
-          throws IOException {
+            throws IOException {
         String hiddenField = null;
         StateManager stateManager = context.getApplication().getStateManager();
         ResponseWriter writer = context.getResponseWriter();
 
         writer.startElement("text", context.getViewRoot());
         writer.writeAttribute("name",
-                              javax.faces.render.ResponseStateManager.VIEW_STATE_PARAM,
-                              null);
+                jakarta.faces.render.ResponseStateManager.VIEW_STATE_PARAM,
+                null);
         writer.writeAttribute("id",
-                              javax.faces.render.ResponseStateManager.VIEW_STATE_PARAM,
-                              null);
-
+                jakarta.faces.render.ResponseStateManager.VIEW_STATE_PARAM,
+                null);
 
         if (stateManager.isSavingStateInClient(context)) {
             GZIPOutputStream zos = null;
@@ -205,10 +200,10 @@ public class SVGResponseStateManager extends ResponseStateManager {
             }
 
             byte[] securedata = byteArrayGuard.encrypt(context,
-                                                       bos.toByteArray());
+                    bos.toByteArray());
             bos.close();
             String valueToWrite = (new String(Base64.encode(securedata),
-                                              "ISO-8859-1"));
+                    "ISO-8859-1"));
             writer.writeAttribute("value", valueToWrite, null);
             writer.writeAttribute("visibility", "hidden", "visibility");
             writer.writeText(valueToWrite, null);
@@ -227,11 +222,11 @@ public class SVGResponseStateManager extends ResponseStateManager {
         if ((null != result && !result.equals("SVG")) || result == null) {
             writer.startElement("text", context.getViewRoot());
             writer.writeAttribute("name",
-                                  ResponseStateManager.RENDER_KIT_ID_PARAM,
-                                  "name");
+                    ResponseStateManager.RENDER_KIT_ID_PARAM,
+                    "name");
             writer.writeAttribute("id",
-                                  ResponseStateManager.RENDER_KIT_ID_PARAM,
-                                  "id");
+                    ResponseStateManager.RENDER_KIT_ID_PARAM,
+                    "id");
             writer.writeAttribute("value", "SVG", "value");
             writer.writeAttribute("visibility", "hidden", "visibility");
             writer.writeText("SVG", null);
@@ -242,8 +237,8 @@ public class SVGResponseStateManager extends ResponseStateManager {
 
     private Object getComponentState(FacesContext context) {
         // requestMap is a local variable so we don't need to synchronize
-        Map<String, Object> requestMap =
-              context.getExternalContext().getRequestMap();
+        Map<String, Object> requestMap
+                = context.getExternalContext().getRequestMap();
         Object state = requestMap.get(FACES_VIEW_STATE);
         // null out the temporary attribute, since we don't need it anymore.
         requestMap.remove(FACES_VIEW_STATE);
@@ -251,14 +246,14 @@ public class SVGResponseStateManager extends ResponseStateManager {
     }
 
     private Object getTreeStructure(FacesContext context,
-                                    String treeId) {
+            String treeId) {
         StateManager stateManager = context.getApplication().getStateManager();
 
         Map<String, String> requestParamMap = context.getExternalContext()
-              .getRequestParameterMap();
+                .getRequestParameterMap();
 
         String viewString = requestParamMap.get(
-              javax.faces.render.ResponseStateManager.VIEW_STATE_PARAM);
+                jakarta.faces.render.ResponseStateManager.VIEW_STATE_PARAM);
         Object structure = null;
         if (viewString == null) {
             return null;
@@ -273,7 +268,7 @@ public class SVGResponseStateManager extends ResponseStateManager {
 
             try {
                 byte[] bytes = byteArrayGuard.decrypt(context,
-                                                      (Base64.decode(viewString.getBytes())));
+                        (Base64.decode(viewString.getBytes())));
                 bis = new ByteArrayInputStream(bytes);
                 if (isCompressStateSet(context)) {
                     if (logger.isLoggable(Level.FINE)) {
@@ -286,8 +281,8 @@ public class SVGResponseStateManager extends ResponseStateManager {
                 }
                 structure = ois.readObject();
                 state = ois.readObject();
-                Map<String, Object> requestMap =
-                      context.getExternalContext().getRequestMap();
+                Map<String, Object> requestMap
+                        = context.getExternalContext().getRequestMap();
                 // store the state object temporarily in request scope
                 // until it is processed by getComponentState
                 // which resets it.
@@ -320,12 +315,11 @@ public class SVGResponseStateManager extends ResponseStateManager {
         compressStateSet = Boolean.TRUE;
 
         String compressStateParam = context.getExternalContext().
-              getInitParameter(COMPRESS_STATE_PARAM);
+                getInitParameter(COMPRESS_STATE_PARAM);
         if (compressStateParam != null) {
             compressStateSet = Boolean.valueOf(compressStateParam);
         }
         return compressStateSet.booleanValue();
     }
-
 
 } // end of class SVGResponseStateManager
