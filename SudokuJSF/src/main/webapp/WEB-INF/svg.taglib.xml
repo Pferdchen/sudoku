@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib version="3.0"
+                xmlns="https://jakarta.ee/xml/ns/jakartaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facelettaglibrary_3_0.xsd">
+    <namespace>https://jsf-demo.com/componets/svg</namespace>
+    <tag>
+        <tag-name>line</tag-name>
+        <component>
+            <component-type>Line</component-type>
+            <renderer-type>renderkit.svg.Line</renderer-type>
+        </component>
+        <attribute>
+            <description><![CDATA[Unique identifier of the component in a namingContainer.]]></description>
+            <name>id</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[Boolean value to specify the rendering of the component, when set to false component will not be rendered.]]></description>
+            <name>rendered</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description><![CDATA[Attributes for Fob im style format attr-name:attr-value;]]></description>
+            <name>attribute</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+</facelet-taglib>
